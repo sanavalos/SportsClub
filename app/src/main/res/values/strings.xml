@@ -17,4 +17,13 @@
     <string name="asignar_actividad_deportivo_burger">ASIGNAR ACTIVIDAD DEL CLUB DEPORTIVO</string>
     <string name="secondary_socio">REGISTRAR SOCIO</string>
     <string name="secondary_no_socio">REGISTRAR NO SOCIO</string>
+    <string name="nombre_form">Nombre...</string>
+    <string name="apellido_form">Apellido...</string>
+    <string name="celular_form">Teléfono...</string>
+    <string name="domicilio_form">Domicilio...</string>
+    <string name="tipo_doc_form">Tipo Doc...</string>
+    <string name="dni_form">Num Doc...</string>
+    <string name="plan_form">Seleccionar plan...</string>
+    <string name="foto_carnet_form">Foto carnet...</string>
+    <string name="apto_fisico_form">Apto Físico</string>
 </resources>

@@ -10,7 +10,7 @@
         android:id="@+id/main"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:context=".RegNoSocio"
+        tools:context=".RegSocio"
         android:background="@drawable/gradient_background">
 
         <ImageView
@@ -51,7 +51,6 @@
 
         </androidx.appcompat.widget.Toolbar>
 
-
         <ImageView
             android:id="@+id/backMenu"
             android:layout_width="32dp"
@@ -64,6 +63,158 @@
             app:srcCompat="@drawable/arrow_back" />
 
 
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/nombre_socio"
+            style="@style/Base.Theme.SportsClub"
+            android:layout_width="160dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="40dp"
+            android:layout_marginEnd="24dp"
+            android:layout_marginBottom="15dp"
+            android:hint="@string/nombre_form"
+            app:layout_constraintBottom_toTopOf="@+id/celular_socio"
+            app:layout_constraintEnd_toStartOf="@+id/apellido_socio"
+            app:layout_constraintHorizontal_bias="0.145"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/toolbar">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/background_form"
+                android:fontFamily="@font/roboto"
+                android:textStyle="italic" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/apellido_socio"
+            style="@style/Base.Theme.SportsClub"
+            android:layout_width="160dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="40dp"
+            android:layout_marginEnd="32dp"
+            android:layout_marginBottom="15dp"
+            android:hint="@string/apellido_form"
+            app:layout_constraintBottom_toTopOf="@+id/celular_socio"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/toolbar">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/background_form"
+                android:fontFamily="@font/roboto"
+                android:textStyle="italic" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/celular_socio"
+            style="@style/Base.Theme.SportsClub"
+            android:layout_width="345dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="100dp"
+            android:layout_marginEnd="32dp"
+            android:hint="@string/celular_form"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/toolbar">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/background_form"
+                android:fontFamily="@font/roboto"
+                android:textStyle="italic" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/domicilio_socio"
+            style="@style/Base.Theme.SportsClub"
+            android:layout_width="345dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="32dp"
+            android:hint="@string/domicilio_form"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/celular_socio">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/background_form"
+                android:fontFamily="@font/roboto"
+                android:textStyle="italic" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tipoDoc_socio"
+            style="@style/Base.Theme.SportsClub"
+            android:layout_width="160dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="24dp"
+            android:hint="@string/tipo_doc_form"
+            app:layout_constraintEnd_toStartOf="@+id/numDoc_socio"
+            app:layout_constraintHorizontal_bias="0.145"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/domicilio_socio">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/background_form"
+                android:fontFamily="@font/roboto"
+                android:textStyle="italic" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/numDoc_socio"
+            style="@style/Base.Theme.SportsClub"
+            android:layout_width="160dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="32dp"
+            android:hint="@string/dni_form"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/domicilio_socio">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/background_form"
+                android:fontFamily="@font/roboto"
+                android:textStyle="italic" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+        <CheckBox
+            android:id="@+id/checkBox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
+            android:text="@string/apto_fisico_form"
+            android:textColor="@color/text"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tipoDoc_socio" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/regSocioButton"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:background="@drawable/rounded_buttons"
+            android:text="@string/registrar_no_socio"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/checkBox" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

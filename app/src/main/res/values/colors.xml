@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="text">#FDFDFD</color>
+    <color name="textHint">#171717</color>
     <color name="textSecondary">#138F84</color>
 </resources>
