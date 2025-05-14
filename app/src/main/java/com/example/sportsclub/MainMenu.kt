@@ -1,6 +1,8 @@
 package com.example.sportsclub
 
+import android.content.Intent
 import android.os.Bundle
+import android.widget.Button
 import android.widget.ImageView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -24,6 +26,19 @@ class MainMenu : AppCompatActivity() {
             val dialog = BottomSheetDialog(this)
             dialog.setContentView(bottomSheetView)
             dialog.show()
+        }
+
+        val buttonSocio = findViewById<Button>(R.id.regSocio)
+        buttonSocio.setOnClickListener {
+            val intent = Intent(this, RegSocio::class.java)
+            startActivity(intent)
+        }
+
+
+        val buttonNoSocio = findViewById<Button>(R.id.regNoSocio)
+        buttonNoSocio.setOnClickListener {
+            val intent = Intent(this, RegNoSocio::class.java)
+            startActivity(intent)
         }
     }
 }

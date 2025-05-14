@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true">
+
+<androidx.constraintlayout.widget.ConstraintLayout
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -13,23 +18,23 @@
         android:layout_width="match_parent"
         android:layout_height="160dp"
         android:layout_marginTop="45dp"
-        android:contentDescription="Logo de Ráfaga Deportiva"
-        app:layout_constraintTop_toTopOf="parent"
+        android:contentDescription="@string/alt_logo"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/club_deportivo8_1_removebg_preview" />
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="62dp"
-        android:layout_marginTop="260dp"
+        android:layout_marginTop="40dp"
         android:background="@drawable/background_secondary"
-        android:minHeight="?attr/actionBarSize"
 
+        android:minHeight="?attr/actionBarSize"
         android:theme="?attr/actionBarTheme"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toBottomOf="@+id/imageView2">
 
         <TextView
             android:id="@+id/bienvenidaUsuario"
@@ -37,50 +42,52 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
             android:layout_marginTop="15dp"
-            android:text="¡Bienvenido, Admin!"
+            android:text="@string/bienvenido_admin"
             android:textColor="@color/textSecondary"
             android:textSize="22sp"
             android:textStyle="italic"
             app:layout_constraintStart_toStartOf="@+id/toolbar"
             app:layout_constraintTop_toTopOf="@+id/toolbar" />
 
-        <ImageView
-            android:id="@+id/botonHamburguesa"
-            android:layout_width="32dp"
-            android:layout_height="32dp"
-            app:srcCompat="@drawable/burger"
-            android:contentDescription="Menú"
-            android:layout_marginEnd="16dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@id/bienvenidaUsuario"
-            app:layout_constraintBottom_toBottomOf="@id/bienvenidaUsuario"
-            android:layout_marginTop="0dp"
-            android:layout_marginBottom="0dp"/>
-
     </androidx.appcompat.widget.Toolbar>
+
+
+    <ImageView
+        android:id="@+id/botonHamburguesa"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="20dp"
+        android:contentDescription="@string/menu"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/toolbar"
+        app:srcCompat="@drawable/burger" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/regSocio"
         android:layout_width="300dp"
         android:layout_height="80dp"
+        android:layout_marginTop="56dp"
         android:background="@drawable/background_button_menu"
-        android:layout_marginTop="400dp"
-        android:text="Registrar socio"
-        app:layout_constraintTop_toTopOf="parent"
+        android:text="@string/registrar_socio"
+        app:layout_constraintHorizontal_bias="0.504"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        />
+        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/regNoSocio"
         android:layout_width="300dp"
         android:layout_height="80dp"
+        android:layout_marginTop="56dp"
         android:background="@drawable/background_button_menu"
-        android:layout_marginTop="530dp"
-        android:text="Registrar No Socio"
-        app:layout_constraintTop_toTopOf="parent"
+        android:text="@string/registrar_no_socio"
+        app:layout_constraintHorizontal_bias="0.504"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        />
+        app:layout_constraintTop_toBottomOf="@+id/regSocio" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>

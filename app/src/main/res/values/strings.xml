@@ -1,3 +1,20 @@
 <resources>
     <string name="app_name">Sports Club</string>
+    <string name="menu">Menú</string>
+    <string name="registrar_socio">Registrar socio</string>
+    <string name="registrar_no_socio">Registrar No Socio</string>
+    <string name="bienvenido_admin">¡Bienvenido, Admin!</string>
+    <string name="alt_logo">Logo de Ráfaga Deportiva</string>
+    <string name="email_inicio">E-MAIL</string>
+    <string name="hint_correo">Ingrese su correo...</string>
+    <string name="password_inicio">CONTRASEÑA</string>
+    <string name="hint_password">Ingrese su contraseña...</string>
+    <string name="login_button">Iniciar sesión</string>
+    <string name="otras_operaciones_burger">OTRAS OPERACIONES</string>
+    <string name="lista_de_pagos_burger">LISTA DE PAGOS</string>
+    <string name="listar_vencimientos_burger">LISTAR VENCIMIENTOS DEL DÍA</string>
+    <string name="imprimir_carnet_socio_burger">IMPRIMIR CARNET SOCIO</string>
+    <string name="asignar_actividad_deportivo_burger">ASIGNAR ACTIVIDAD DEL CLUB DEPORTIVO</string>
+    <string name="secondary_socio">REGISTRAR SOCIO</string>
+    <string name="secondary_no_socio">REGISTRAR NO SOCIO</string>
 </resources>
