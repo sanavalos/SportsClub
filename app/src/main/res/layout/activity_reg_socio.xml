@@ -84,6 +84,10 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/background_form"
                 android:fontFamily="@font/roboto"
+                android:inputType="text"
+                android:minHeight="50dp"
+                android:paddingTop="12dp"
+                android:paddingBottom="12dp"
                 android:textStyle="italic" />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -106,6 +110,10 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/background_form"
                 android:fontFamily="@font/roboto"
+                android:minHeight="50dp"
+                android:paddingTop="12dp"
+                android:paddingBottom="12dp"
+                android:inputType="text"
                 android:textStyle="italic" />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -126,6 +134,10 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/background_form"
                 android:fontFamily="@font/roboto"
+                android:inputType="phone"
+                android:minHeight="50dp"
+                android:paddingTop="12dp"
+                android:paddingBottom="12dp"
                 android:textStyle="italic" />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -146,29 +158,35 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/background_form"
                 android:fontFamily="@font/roboto"
+                android:minHeight="50dp"
+                android:paddingTop="12dp"
+                android:paddingBottom="12dp"
                 android:textStyle="italic" />
         </com.google.android.material.textfield.TextInputLayout>
 
-        <com.google.android.material.textfield.TextInputLayout
+      <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/tipoDoc_socio"
             style="@style/Base.Theme.SportsClub"
             android:layout_width="160dp"
             android:layout_height="50dp"
             android:layout_marginTop="15dp"
             android:layout_marginEnd="24dp"
-            android:hint="@string/tipo_doc_form"
             app:layout_constraintEnd_toStartOf="@+id/numDoc_socio"
             app:layout_constraintHorizontal_bias="0.145"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/domicilio_socio">
 
-            <com.google.android.material.textfield.TextInputEditText
+            <com.google.android.material.textfield.MaterialAutoCompleteTextView
+                android:id="@+id/autoCompleteDoc"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="50dp"
+                android:minHeight="50dp"
+                android:hint="@string/tipo_doc_form"
                 android:background="@drawable/background_form"
                 android:fontFamily="@font/roboto"
-                android:textStyle="italic" />
+                android:textStyle="italic"
+                android:padding="12dp" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -188,7 +206,11 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/background_form"
                 android:fontFamily="@font/roboto"
-                android:textStyle="italic" />
+                android:minHeight="50dp"
+                android:paddingTop="12dp"
+                android:paddingBottom="12dp"
+                android:textStyle="italic"
+                android:inputType="number"/>
         </com.google.android.material.textfield.TextInputLayout>
 
 
@@ -199,38 +221,34 @@
             android:layout_height="50dp"
             android:layout_marginTop="15dp"
             android:layout_marginEnd="32dp"
-            android:hint="@string/plan_form"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tipoDoc_socio">
 
-            <com.google.android.material.textfield.TextInputEditText
+            <com.google.android.material.textfield.MaterialAutoCompleteTextView
+                android:id="@+id/autoCompletePlan"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="50dp"
+                android:minHeight="50dp"
+                android:hint="@string/plan_form"
                 android:background="@drawable/background_form"
                 android:fontFamily="@font/roboto"
-                android:textStyle="italic" />
+                android:textStyle="italic"
+                android:padding="12dp" />
         </com.google.android.material.textfield.TextInputLayout>
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/carnet_socio"
-            style="@style/Base.Theme.SportsClub"
-            android:layout_width="160dp"
-            android:layout_height="50dp"
-            android:layout_marginTop="15dp"
-            android:layout_marginEnd="36dp"
-            android:hint="@string/foto_carnet_form"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/plan_socio">
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_carnet_socio"
+            android:layout_width="170dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="20dp"
+            android:text="@string/foto_carnet_form"
+            android:background="@drawable/background_carnet"
+            android:textColor="@color/textHint"
+            app:layout_constraintTop_toBottomOf="@+id/plan_socio"
+            app:layout_constraintStart_toEndOf="@+id/checkBox"
+            app:layout_constraintEnd_toEndOf="parent"/>
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/background_form"
-                android:fontFamily="@font/roboto"
-                android:textStyle="italic" />
-        </com.google.android.material.textfield.TextInputLayout>
 
         <CheckBox
             android:id="@+id/checkBox"
@@ -240,11 +258,10 @@
             android:text="@string/apto_fisico_form"
             android:textColor="@color/text"
             android:textStyle="bold"
-            app:layout_constraintEnd_toStartOf="@+id/carnet_socio"
-            app:layout_constraintHorizontal_bias="0.311"
+            android:buttonTint="@color/text"
+            app:layout_constraintEnd_toStartOf="@+id/btn_carnet_socio"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/plan_socio" />
-
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/regSocioButton"

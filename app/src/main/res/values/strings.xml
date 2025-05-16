@@ -26,4 +26,9 @@
     <string name="plan_form">Seleccionar plan...</string>
     <string name="foto_carnet_form">Foto carnet...</string>
     <string name="apto_fisico_form">Apto Físico</string>
+    <string name="registrado">REGISTRADO</string>
+    <string name="correctamente">CORRECTAMENTE</string>
+    <string name="inicio">Inicio</string>
+    <string name="socio">SOCIO</string>
+    <string name="no_socio">NO SOCIO</string>
 </resources>

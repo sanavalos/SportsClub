@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/main"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:context=".NoSocioOkay"
+        android:background="@drawable/gradient_background">
+
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="match_parent"
+            android:layout_height="160dp"
+            android:layout_marginTop="45dp"
+            android:contentDescription="@string/alt_logo"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/club_deportivo8_1_removebg_preview" />
+
+        <ImageView
+            android:id="@+id/checkIcon"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:layout_marginTop="100dp"
+            android:contentDescription="@string/alt_logo"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/imageView2"
+            app:srcCompat="@drawable/icon_check" />
+
+        <TextView
+            android:id="@+id/linea1"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:text="@string/no_socio"
+            android:layout_marginTop="20dp"
+            android:textSize="35sp"
+            android:textAlignment="center"
+            android:textStyle="bold"
+            app:layout_constraintTop_toBottomOf="@id/checkIcon"
+            />
+
+        <TextView
+            android:id="@+id/linea2"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:text="@string/registrado"
+            android:textSize="35sp"
+            android:textAlignment="center"
+            android:textStyle="bold"
+            app:layout_constraintTop_toBottomOf="@id/linea1"
+            />
+
+        <TextView
+            android:id="@+id/linea3"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:text="@string/correctamente"
+            android:textSize="35sp"
+            android:textAlignment="center"
+            android:textStyle="bold"
+            app:layout_constraintTop_toBottomOf="@id/linea2"
+            />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/home"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/rounded_buttons"
+            android:text="@string/inicio"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/linea3" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            app:layout_constraintTop_toBottomOf="@id/home"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>
