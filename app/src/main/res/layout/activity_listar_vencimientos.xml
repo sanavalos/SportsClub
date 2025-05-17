@@ -51,91 +51,6 @@
 
         </androidx.appcompat.widget.Toolbar>
 
-        <TextView
-            android:id="@+id/Vto1"
-            android:layout_width="350dp"
-            android:layout_height="wrap_content"
-            android:background="@drawable/background_form"
-            android:gravity="start"
-            android:padding="12dp"
-            android:text="@string/vencimiento1"
-            android:textColor="#000000"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.531"
-            app:layout_constraintStart_toStartOf="parent"
-            tools:layout_editor_absoluteY="323dp"
-            tools:ignore="MissingConstraints" />
-
-        <TextView
-            android:id="@+id/Vto2"
-            android:layout_width="350dp"
-            android:layout_height="wrap_content"
-            android:background="@drawable/background_form"
-            android:gravity="start"
-            android:padding="12dp"
-            android:text="@string/vencimiento2"
-            android:textColor="#000000"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.531"
-            app:layout_constraintStart_toStartOf="parent"
-            tools:layout_editor_absoluteY="388dp"
-            tools:ignore="MissingConstraints" />
-
-        <TextView
-            android:id="@+id/Vto3"
-            android:layout_width="350dp"
-            android:layout_height="wrap_content"
-            android:background="@drawable/background_form"
-            android:gravity="start"
-            android:padding="12dp"
-            android:text="@string/vencimiento3"
-            android:textColor="#000000"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.531"
-            app:layout_constraintStart_toStartOf="parent"
-            tools:layout_editor_absoluteY="453dp"
-            tools:ignore="MissingConstraints" />
-
-        <TextView
-            android:id="@+id/Vto4"
-            android:layout_width="350dp"
-            android:layout_height="wrap_content"
-            android:background="@drawable/background_form"
-            android:gravity="start"
-            android:padding="12dp"
-            android:text="@string/vencimiento4"
-            android:textColor="#000000"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.531"
-            app:layout_constraintStart_toStartOf="parent"
-            tools:layout_editor_absoluteY="518dp"
-            tools:ignore="MissingConstraints" />
-
-        <TextView
-            android:id="@+id/Vto5"
-            android:layout_width="350dp"
-            android:layout_height="wrap_content"
-            android:background="@drawable/background_form"
-            android:gravity="start"
-            android:padding="12dp"
-            android:text="@string/vencimiento5"
-            android:textColor="#000000"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.531"
-            app:layout_constraintStart_toStartOf="parent"
-            tools:layout_editor_absoluteY="583dp"
-            tools:ignore="MissingConstraints" />
-
         <ImageView
             android:id="@+id/backMenu"
             android:layout_width="32dp"
@@ -147,6 +62,99 @@
             app:layout_constraintTop_toTopOf="@+id/toolbar"
             app:srcCompat="@drawable/arrow_back" />
 
+        <LinearLayout
+            android:id="@+id/resultado_busqueda"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="24dp"
+            android:gravity="center_vertical"
+            android:layout_margin="16dp"
+            android:elevation="4dp"
+            android:orientation="vertical"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/toolbar">
+            <TextView
+                android:id="@+id/Vto1"
+                android:layout_width="350dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/background_form"
+                android:gravity="start"
+                android:padding="12dp"
+                android:text="@string/vencimiento1"
+                android:textColor="#000000"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintBottom_toBottomOf="@+id/toolbar"
+                />
+
+            <TextView
+                android:id="@+id/Vto2"
+                android:layout_width="350dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/background_form"
+                android:gravity="start"
+                android:padding="12dp"
+                android:text="@string/vencimiento2"
+                android:textColor="#000000"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@+id/Vto1"
+                app:layout_constraintHorizontal_bias="0.491"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent" />
+
+            <TextView
+                android:id="@+id/Vto3"
+                android:layout_width="350dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/background_form"
+                android:gravity="start"
+                android:padding="12dp"
+                android:text="@string/vencimiento3"
+                android:textColor="#000000"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintBottom_toBottomOf="@+id/Vto2"
+                />
+
+            <TextView
+                android:id="@+id/Vto4"
+                android:layout_width="350dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/background_form"
+                android:gravity="start"
+                android:padding="12dp"
+                android:text="@string/vencimiento4"
+                android:textColor="#000000"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintBottom_toBottomOf="@+id/Vto3"
+                />
+
+            <TextView
+                android:id="@+id/Vto5"
+                android:layout_width="350dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/background_form"
+                android:gravity="start"
+                android:padding="12dp"
+                android:text="@string/vencimiento5"
+                android:textColor="#000000"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintBottom_toBottomOf="@+id/Vto4"
+                />
+        </LinearLayout>
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/Imprimirpdf"
