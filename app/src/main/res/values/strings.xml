@@ -31,4 +31,10 @@
     <string name="inicio">Inicio</string>
     <string name="socio">SOCIO</string>
     <string name="no_socio">NO SOCIO</string>
+    <string name="datos_pago">Datos del pago</string>
+    <string name="pago_button">Pagar</string>
+    <string name="cuotas_form">Cantidad de Cuotas</string>
+    <string name="monto_form">MONTO A PAGAR</string>
+    <string name="siguiente_button">SIGUIENTE</string>
+    <string name="actividades">ACTIVIDADES</string>
 </resources>
