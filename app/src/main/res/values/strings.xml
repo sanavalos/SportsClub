@@ -31,4 +31,5 @@
     <string name="inicio">Inicio</string>
     <string name="socio">SOCIO</string>
     <string name="no_socio">NO SOCIO</string>
+    <string name="pago">PAGO</string>
 </resources>
