@@ -52,7 +52,8 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.495"
             app:layout_constraintStart_toStartOf="parent"
-            tools:layout_editor_absoluteY="447dp" />
+            tools:layout_editor_absoluteY="447dp"
+            tools:ignore="MissingConstraints" />
 
         <TextView
             android:id="@+id/DNI"
@@ -68,7 +69,8 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.495"
             app:layout_constraintStart_toStartOf="parent"
-            tools:layout_editor_absoluteY="520dp" />
+            tools:layout_editor_absoluteY="520dp"
+            tools:ignore="MissingConstraints" />
 
         <TextView
             android:id="@+id/Socio"
@@ -84,7 +86,8 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.495"
             app:layout_constraintStart_toStartOf="parent"
-            tools:layout_editor_absoluteY="595dp" />
+            tools:layout_editor_absoluteY="595dp"
+            tools:ignore="MissingConstraints" />
 
         <ImageView
             android:id="@+id/imageView3"
