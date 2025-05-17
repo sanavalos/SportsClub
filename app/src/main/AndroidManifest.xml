@@ -13,6 +13,12 @@
         android:theme="@style/Theme.SportsClub"
         tools:targetApi="31">
         <activity
+            android:name=".ListarVencimientosActivity"
+            android:exported="false" />
+        <activity
+            android:name=".CarnetSocioActivity"
+            android:exported="false" />
+        <activity
             android:name=".PagoOkayActivity"
             android:exported="false" />
         <activity

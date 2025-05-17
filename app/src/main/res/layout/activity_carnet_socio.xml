@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/main"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:context=".RegSocio"
+        android:background="@drawable/gradient_background">
+
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="match_parent"
+            android:layout_height="160dp"
+            android:layout_marginTop="45dp"
+            android:contentDescription="@string/alt_logo"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/club_deportivo8_1_removebg_preview" />
+
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="313dp"
+            android:layout_height="445dp"
+            android:layout_marginTop="18dp"
+            android:background="@drawable/background_secondary"
+            android:minHeight="?attr/actionBarSize"
+
+            android:theme="?attr/actionBarTheme"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageView2" />
+
+        <TextView
+            android:id="@+id/textNombre"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/background_form"
+            android:gravity="start"
+            android:padding="12dp"
+            android:text="@string/nombre_dos_lineas"
+            android:textColor="#000000"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.495"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:layout_editor_absoluteY="447dp" />
+
+        <TextView
+            android:id="@+id/DNI"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/background_form"
+            android:gravity="start"
+            android:padding="12dp"
+            android:text="@string/Dni_dos_lineas"
+            android:textColor="#000000"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.495"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:layout_editor_absoluteY="520dp" />
+
+        <TextView
+            android:id="@+id/Socio"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/background_form"
+            android:gravity="start"
+            android:padding="12dp"
+            android:text="@string/Socio_dos_lineas"
+            android:textColor="#000000"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.495"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:layout_editor_absoluteY="595dp" />
+
+        <ImageView
+            android:id="@+id/imageView3"
+            android:layout_width="match_parent"
+            android:layout_height="160dp"
+            android:layout_marginTop="244dp"
+            android:contentDescription="@string/alt_logo"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/fotocarnet" />
+
+
+        <TextView
+            android:id="@+id/linea1"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="8dp"
+            android:text="@string/carnet"
+            android:textAlignment="center"
+            android:textSize="24dp"
+            android:textStyle="bold"
+            app:layout_constraintTop_toBottomOf="@id/imageView3"
+            tools:layout_editor_absoluteX="0dp" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/ImprimirCarnet"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/rounded_buttons"
+            android:text="@string/imprimir"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintHorizontal_bias="0.497"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>

@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/main"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:context=".RegSocio"
+        android:background="@drawable/gradient_background">
+
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="match_parent"
+            android:layout_height="160dp"
+            android:layout_marginTop="45dp"
+            android:contentDescription="@string/alt_logo"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/club_deportivo8_1_removebg_preview" />
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="62dp"
+            android:layout_marginTop="40dp"
+            android:background="@drawable/background_secondary"
+
+            android:minHeight="?attr/actionBarSize"
+            android:theme="?attr/actionBarTheme"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageView2">
+
+            <TextView
+                android:id="@+id/bienvenidaUsuario"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="15dp"
+                android:text="@string/vencimientos"
+                android:textColor="@color/textSecondary"
+                android:textSize="22sp"
+                android:textStyle="italic"
+                app:layout_constraintStart_toStartOf="@+id/toolbar"
+                app:layout_constraintTop_toTopOf="@+id/toolbar" />
+
+        </androidx.appcompat.widget.Toolbar>
+
+        <TextView
+            android:id="@+id/Vto1"
+            android:layout_width="350dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/background_form"
+            android:gravity="start"
+            android:padding="12dp"
+            android:text="@string/vencimiento1"
+            android:textColor="#000000"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.531"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:layout_editor_absoluteY="323dp" />
+
+        <TextView
+            android:id="@+id/Vto2"
+            android:layout_width="350dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/background_form"
+            android:gravity="start"
+            android:padding="12dp"
+            android:text="@string/vencimiento2"
+            android:textColor="#000000"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.531"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:layout_editor_absoluteY="388dp" />
+
+        <TextView
+            android:id="@+id/Vto3"
+            android:layout_width="350dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/background_form"
+            android:gravity="start"
+            android:padding="12dp"
+            android:text="@string/vencimiento3"
+            android:textColor="#000000"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.531"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:layout_editor_absoluteY="453dp" />
+
+        <TextView
+            android:id="@+id/Vto4"
+            android:layout_width="350dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/background_form"
+            android:gravity="start"
+            android:padding="12dp"
+            android:text="@string/vencimiento4"
+            android:textColor="#000000"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.531"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:layout_editor_absoluteY="518dp" />
+
+        <TextView
+            android:id="@+id/Vto5"
+            android:layout_width="350dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/background_form"
+            android:gravity="start"
+            android:padding="12dp"
+            android:text="@string/vencimiento5"
+            android:textColor="#000000"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.531"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:layout_editor_absoluteY="583dp" />
+
+        <ImageView
+            android:id="@+id/backMenu"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="20dp"
+            android:contentDescription="@string/menu"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/toolbar"
+            app:srcCompat="@drawable/arrow_back" />
+
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/Imprimirpdf"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:background="@drawable/rounded_buttons"
+            android:text="@string/imprimirpdf"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintHorizontal_bias="0.497"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>
