@@ -65,7 +65,8 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.531"
             app:layout_constraintStart_toStartOf="parent"
-            tools:layout_editor_absoluteY="323dp" />
+            tools:layout_editor_absoluteY="323dp"
+            tools:ignore="MissingConstraints" />
 
         <TextView
             android:id="@+id/Vto2"
@@ -81,7 +82,8 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.531"
             app:layout_constraintStart_toStartOf="parent"
-            tools:layout_editor_absoluteY="388dp" />
+            tools:layout_editor_absoluteY="388dp"
+            tools:ignore="MissingConstraints" />
 
         <TextView
             android:id="@+id/Vto3"
@@ -97,7 +99,8 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.531"
             app:layout_constraintStart_toStartOf="parent"
-            tools:layout_editor_absoluteY="453dp" />
+            tools:layout_editor_absoluteY="453dp"
+            tools:ignore="MissingConstraints" />
 
         <TextView
             android:id="@+id/Vto4"
@@ -113,7 +116,8 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.531"
             app:layout_constraintStart_toStartOf="parent"
-            tools:layout_editor_absoluteY="518dp" />
+            tools:layout_editor_absoluteY="518dp"
+            tools:ignore="MissingConstraints" />
 
         <TextView
             android:id="@+id/Vto5"
@@ -129,7 +133,8 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.531"
             app:layout_constraintStart_toStartOf="parent"
-            tools:layout_editor_absoluteY="583dp" />
+            tools:layout_editor_absoluteY="583dp"
+            tools:ignore="MissingConstraints" />
 
         <ImageView
             android:id="@+id/backMenu"
