@@ -31,8 +31,7 @@ class DatosPagoActivity : AppCompatActivity() {
 
         val pagoButton = findViewById<Button>(R.id.pagoButton)
         pagoButton.setOnClickListener {
-            // TODO: change startActivity to redirect to PagoOkay
-            val intent = Intent(this, MainMenu::class.java)
+            val intent = Intent(this, PagoOkayActivity::class.java)
             startActivity(intent)
         }
 
