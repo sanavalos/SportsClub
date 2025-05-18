@@ -63,12 +63,12 @@ class MainMenu : AppCompatActivity() {
             }
 
             listarVencimientosButton.setOnClickListener {
-//                startActivity(Intent(this, ListarVencimientosActivity::class.java))
+                startActivity(Intent(this, ListarVencimientosActivity::class.java))
                 dialog.dismiss()
             }
 
             imprimirCarnetButton.setOnClickListener {
-//                startActivity(Intent(this, ImprimirCarnetActivity::class.java))
+                startActivity(Intent(this, CarnetSocioActivity::class.java))
                 dialog.dismiss()
             }
 
