@@ -56,7 +56,6 @@ class MainMenu : AppCompatActivity() {
             val imprimirCarnetButton = bottomSheetView.findViewById<TextView>(R.id.imprimirCarnetButton)
             val asignarActividadButton = bottomSheetView.findViewById<TextView>(R.id.asignarActividadButton)
 
-            //TODO: Add activities reference to each listener
             listaPagosButton.setOnClickListener {
                 startActivity(Intent(this, PaymentListActivity::class.java))
                 dialog.dismiss()
@@ -73,7 +72,7 @@ class MainMenu : AppCompatActivity() {
             }
 
             asignarActividadButton.setOnClickListener {
-//                startActivity(Intent(this, ActividadesListaActivity::class.java))
+                startActivity(Intent(this, ActividadesListaActivity::class.java))
                 dialog.dismiss()
             }
 
