@@ -58,7 +58,7 @@ class MainMenu : AppCompatActivity() {
 
             //TODO: Add activities reference to each listener
             listaPagosButton.setOnClickListener {
-//                startActivity(Intent(this, ListaPagosActivity::class.java))
+                startActivity(Intent(this, PaymentListActivity::class.java))
                 dialog.dismiss()
             }
 
