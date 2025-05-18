@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
+import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -26,6 +27,18 @@ class MainMenu : AppCompatActivity() {
 
         val menuButton = findViewById<ImageView>(R.id.botonHamburguesa)
 
+        val buttonSocio = findViewById<Button>(R.id.regSocio)
+        buttonSocio.setOnClickListener {
+            val intent = Intent(this, RegSocio::class.java)
+            startActivity(intent)
+        }
+
+        val buttonNoSocio = findViewById<Button>(R.id.regNoSocio)
+        buttonNoSocio.setOnClickListener {
+            val intent = Intent(this, RegNoSocio::class.java)
+            startActivity(intent)
+        }
+
         menuButton.setOnClickListener {
             val bottomSheetView = layoutInflater.inflate(R.layout.burger_menu, null)
             val dialog = BottomSheetDialog(this, R.style.BottomSheetDialogTheme)
@@ -38,20 +51,33 @@ class MainMenu : AppCompatActivity() {
                 behavior.state = BottomSheetBehavior.STATE_EXPANDED
             }
 
+            val listaPagosButton = bottomSheetView.findViewById<TextView>(R.id.listaPagosButton)
+            val listarVencimientosButton = bottomSheetView.findViewById<TextView>(R.id.listarVencimientosButton)
+            val imprimirCarnetButton = bottomSheetView.findViewById<TextView>(R.id.imprimirCarnetButton)
+            val asignarActividadButton = bottomSheetView.findViewById<TextView>(R.id.asignarActividadButton)
+
+            //TODO: Add activities reference to each listener
+            listaPagosButton.setOnClickListener {
+//                startActivity(Intent(this, ListaPagosActivity::class.java))
+                dialog.dismiss()
+            }
+
+            listarVencimientosButton.setOnClickListener {
+//                startActivity(Intent(this, ListarVencimientosActivity::class.java))
+                dialog.dismiss()
+            }
+
+            imprimirCarnetButton.setOnClickListener {
+//                startActivity(Intent(this, ImprimirCarnetActivity::class.java))
+                dialog.dismiss()
+            }
+
+            asignarActividadButton.setOnClickListener {
+//                startActivity(Intent(this, ActividadesListaActivity::class.java))
+                dialog.dismiss()
+            }
+
             dialog.show()
-        }
-
-        val buttonSocio = findViewById<Button>(R.id.regSocio)
-        buttonSocio.setOnClickListener {
-            val intent = Intent(this, RegSocio::class.java)
-            startActivity(intent)
-        }
-
-
-        val buttonNoSocio = findViewById<Button>(R.id.regNoSocio)
-        buttonNoSocio.setOnClickListener {
-            val intent = Intent(this, RegNoSocio::class.java)
-            startActivity(intent)
         }
     }
 
