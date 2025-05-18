@@ -18,9 +18,9 @@ class ActividadesActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
-        val actividadesButton = findViewById<Button>(R.id.actividadesButton)
-        actividadesButton.setOnClickListener {
-            val intent = Intent(this, MainMenu::class.java)
+        val siguienteButton = findViewById<Button>(R.id.siguienteButton)
+        siguienteButton.setOnClickListener {
+            val intent = Intent(this, DatosPagoActivity::class.java)
             startActivity(intent)
         }
     }
