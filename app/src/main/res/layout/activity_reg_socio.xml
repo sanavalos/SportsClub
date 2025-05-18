@@ -35,7 +35,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/imageView2">
 
-            <!-- Flecha Back a la izquierda -->
             <ImageView
                 android:id="@+id/backMenu"
                 android:layout_width="32dp"
@@ -47,7 +46,6 @@
                 android:clickable="true"
                 android:focusable="true" />
 
-            <!-- Título centrado -->
             <TextView
                 android:id="@+id/bienvenidaUsuario"
                 android:layout_width="match_parent"
