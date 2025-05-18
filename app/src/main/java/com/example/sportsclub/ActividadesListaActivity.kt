@@ -1,7 +1,9 @@
 package com.example.sportsclub
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.SparseBooleanArray
+import android.widget.Button
 import android.widget.CheckedTextView
 import android.widget.ExpandableListView
 import android.widget.SimpleExpandableListAdapter
@@ -22,6 +24,12 @@ class ActividadesListaActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+        val siguienteButton = findViewById<Button>(R.id.siguienteButton)
+        siguienteButton.setOnClickListener {
+            val intent = Intent(this, ActividadesActivity::class.java)
+            startActivity(intent)
+        }
+
         val expandableListView = findViewById<ExpandableListView>(R.id.expandableListView)
 
         val groupList = listOf("FÚTBOL", "VOLEY", "BÁSQUETBOL")
