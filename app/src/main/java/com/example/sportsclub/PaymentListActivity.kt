@@ -17,6 +17,7 @@ import android.widget.ImageView
 import android.view.inputmethod.EditorInfo
 import android.view.View
 import android.content.Intent
+import android.widget.Button
 
 
 class PaymentListActivity : AppCompatActivity() {
@@ -90,6 +91,11 @@ class PaymentListActivity : AppCompatActivity() {
 
         backMenu.setOnClickListener {
             val intent = Intent(this, MainMenu::class.java)
+            startActivity(intent)
+        }
+
+        nextButton.setOnClickListener {
+            val intent = Intent(this, DatosPagoActivity::class.java)
             startActivity(intent)
         }
 

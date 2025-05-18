@@ -25,14 +25,12 @@ class DatosPagoActivity : AppCompatActivity() {
 
         val menuBack = findViewById<ImageView>(R.id.backMenu)
         menuBack.setOnClickListener {
-            val intent = Intent(this, ActividadesActivity::class.java)
-            startActivity(intent)
+            finish()
         }
 
         val pagoButton = findViewById<Button>(R.id.pagoButton)
         pagoButton.setOnClickListener {
-            // TODO: change startActivity to redirect to PagoOkay
-            val intent = Intent(this, MainMenu::class.java)
+            val intent = Intent(this, PagoOkayActivity::class.java)
             startActivity(intent)
         }
 
