@@ -24,6 +24,7 @@
             android:padding="15dp" />
 
         <TextView
+            android:id="@+id/listaPagosButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/lista_de_pagos_burger"
@@ -33,6 +34,7 @@
             android:background="@drawable/border_top_bottom"/>
 
         <TextView
+            android:id="@+id/listarVencimientosButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/listar_vencimientos_burger"
@@ -41,6 +43,7 @@
             android:padding="13dp" />
 
         <TextView
+            android:id="@+id/imprimirCarnetButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/imprimir_carnet_socio_burger"
@@ -50,6 +53,7 @@
             android:background="@drawable/border_top_bottom" />
 
         <TextView
+            android:id="@+id/asignarActividadButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/asignar_actividad_deportivo_burger"
