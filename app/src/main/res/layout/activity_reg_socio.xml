@@ -30,38 +30,35 @@
             android:layout_height="62dp"
             android:layout_marginTop="40dp"
             android:background="@drawable/background_secondary"
-
             android:minHeight="?attr/actionBarSize"
             android:theme="?attr/actionBarTheme"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/imageView2">
 
+            <!-- Flecha Back a la izquierda -->
+            <ImageView
+                android:id="@+id/backMenu"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_gravity="center_vertical|start"
+                android:contentDescription="@string/menu"
+                android:padding="4dp"
+                android:src="@drawable/arrow_back"
+                android:clickable="true"
+                android:focusable="true" />
+
+            <!-- Título centrado -->
             <TextView
                 android:id="@+id/bienvenidaUsuario"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="24dp"
-                android:layout_marginTop="15dp"
+                android:gravity="center"
                 android:text="@string/secondary_socio"
                 android:textColor="@color/textSecondary"
                 android:textSize="22sp"
-                android:textStyle="italic"
-                app:layout_constraintStart_toStartOf="@+id/toolbar"
-                app:layout_constraintTop_toTopOf="@+id/toolbar" />
+                android:textStyle="italic" />
 
         </androidx.appcompat.widget.Toolbar>
-
-        <ImageView
-            android:id="@+id/backMenu"
-            android:layout_width="32dp"
-            android:layout_height="32dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="20dp"
-            android:contentDescription="@string/menu"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/toolbar"
-            app:srcCompat="@drawable/arrow_back" />
-
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/nombre_socio"
@@ -164,7 +161,7 @@
                 android:textStyle="italic" />
         </com.google.android.material.textfield.TextInputLayout>
 
-      <com.google.android.material.textfield.TextInputLayout
+        <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/tipoDoc_socio"
             style="@style/Base.Theme.SportsClub"
             android:layout_width="160dp"
@@ -213,7 +210,6 @@
                 android:inputType="number"/>
         </com.google.android.material.textfield.TextInputLayout>
 
-
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/plan_socio"
             style="@style/Base.Theme.SportsClub"
@@ -248,7 +244,6 @@
             app:layout_constraintTop_toBottomOf="@+id/plan_socio"
             app:layout_constraintStart_toEndOf="@+id/checkBox"
             app:layout_constraintEnd_toEndOf="parent"/>
-
 
         <CheckBox
             android:id="@+id/checkBox"

@@ -3,7 +3,7 @@
     <string name="menu">Menú</string>
     <string name="registrar_socio">Registrar socio</string>
     <string name="registrar_no_socio">Registrar No Socio</string>
-    <string name="bienvenido_admin">¡Bienvenido, Admin!</string>
+    <string name="bienvenido_admin">¡BIENVENIDO, ADMIN!</string>
     <string name="alt_logo">Logo de Ráfaga Deportiva</string>
     <string name="email_inicio">E-MAIL</string>
     <string name="hint_correo">Ingrese su correo...</string>
@@ -29,6 +29,7 @@
     <string name="registrado">REGISTRADO</string>
     <string name="correctamente">CORRECTAMENTE</string>
     <string name="inicio">Inicio</string>
+    <string name="siguiente">SIGUIENTE</string>
     <string name="socio">SOCIO</string>
     <string name="no_socio">NO SOCIO</string>
     <string name="pago">PAGO</string>
@@ -36,10 +37,6 @@
     <string name="carnet">CARNET DE SOCIO</string>
     <string name="vencimientos">VENCIMIENTOS</string>
     <string name="imprimirpdf">IMPRIMIR PDF</string>
-    <string name="vencimiento1">Juan Ramon&#10;44.256.879</string>
-    <string name="vencimiento2">Martin Perez&#10;39.589.508</string>
-    <string name="vencimiento3">Jorge Martinez&#10;37.984.136</string>
-    <string name="vencimiento4">Adriana Lopez&#10;35.709.890</string>
-    <string name="vencimiento5">Martina Lopez&#10;34.123.970</string>
-    <string name="vencimiento6">Juana Molina&#10;36.890.178</string>
+    <string name="payment_list">LISTA DE PAGOS</string>
+    <string name="insert_document">Ingrese documento...</string>
 </resources>
