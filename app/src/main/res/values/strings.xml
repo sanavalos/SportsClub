@@ -39,4 +39,10 @@
     <string name="imprimirpdf">IMPRIMIR PDF</string>
     <string name="payment_list">LISTA DE PAGOS</string>
     <string name="insert_document">Ingrese documento...</string>
+    <string name="datos_pago">Datos del pago</string>
+    <string name="pago_button">Pagar</string>
+    <string name="cuotas_form">Cantidad de Cuotas</string>
+    <string name="monto_form">MONTO A PAGAR</string>
+    <string name="siguiente_button">SIGUIENTE</string>
+    <string name="actividades">ACTIVIDADES</string>
 </resources>

@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/main"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:context=".ActividadesActivity"
+        android:background="@drawable/gradient_background">
+
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="match_parent"
+            android:layout_height="160dp"
+            android:layout_marginTop="45dp"
+            android:contentDescription="@string/alt_logo"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/club_deportivo8_1_removebg_preview" />
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="62dp"
+            android:layout_marginTop="40dp"
+            android:background="@drawable/background_secondary"
+
+            android:minHeight="?attr/actionBarSize"
+            android:theme="?attr/actionBarTheme"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageView2">
+
+            <TextView
+                android:id="@+id/bienvenidaUsuario"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="15dp"
+                android:text="@string/actividades"
+                android:textColor="@color/textSecondary"
+                android:textSize="22sp"
+                android:textStyle="italic"
+                app:layout_constraintStart_toStartOf="@+id/toolbar"
+                app:layout_constraintTop_toTopOf="@+id/toolbar" />
+
+        </androidx.appcompat.widget.Toolbar>
+
+        <ImageView
+            android:id="@+id/backMenu"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="20dp"
+            android:contentDescription="@string/menu"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/toolbar"
+            app:srcCompat="@drawable/arrow_back" />
+
+        <LinearLayout
+            android:id="@+id/search_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:background="@drawable/searchbar"
+            android:padding="8dp"
+            android:gravity="center_vertical"
+            android:layout_margin="16dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/toolbar">
+
+            <EditText
+                android:id="@+id/search_input"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:hint="Buscar usuario..."
+                android:paddingHorizontal="32dp"
+                android:paddingVertical="8dp"
+                android:background="@android:color/transparent"
+                android:textColor="@color/textSecondary"
+                android:textColorHint="@color/textSecondary"
+                android:textSize="16sp"
+                android:inputType="text"
+                />
+
+            <ImageView
+                app:tint="@color/textSecondary"
+                android:id="@+id/search_icon"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:src="@android:drawable/ic_menu_search"
+                android:contentDescription="Buscar"
+                android:clickable="true"
+                android:focusable="true" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/resultado_busqueda"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="24dp"
+            android:gravity="center_vertical"
+            android:layout_margin="16dp"
+            android:elevation="4dp"
+            android:orientation="vertical"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/search_bar">
+
+            <TextView
+                android:id="@+id/mensaje_resultado"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="Mostrando resultado para:"
+                android:textColor="@color/text"
+                android:textStyle="bold"
+                android:textSize="18dp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/search_bar"
+                />
+            <TextView
+                android:id="@+id/numero_usuario"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="12.345.678"
+                android:textColor="@color/text"
+                android:textStyle="bold|italic"
+                android:textSize="18dp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/mensaje_resultado"
+                />
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/usuario_info"
+            android:layout_width="345dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="12dp"
+            android:paddingVertical="16dp"
+            android:paddingHorizontal="12dp"
+            android:background="@drawable/background_form"
+            android:orientation="vertical"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/resultado_busqueda">
+
+            <TextView
+                android:id="@+id/textView4"
+                android:layout_width="147dp"
+                android:layout_height="19dp"
+                android:text="JUANA PEREZ"
+                android:textColor="@color/textHint"
+                android:textStyle="bold"
+                />
+
+            <TextView
+                android:id="@+id/textView5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="DOCUMENTO: 12.345.678"
+                android:textColor="@color/textHint" />
+
+            <TextView
+                android:id="@+id/textView6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="ESTADO: NO SOCIO"
+                android:textColor="@color/textHint" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/actividad_info"
+            android:layout_width="345dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="24dp"
+            android:paddingVertical="16dp"
+            android:paddingHorizontal="12dp"
+            android:background="@drawable/background_form"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/usuario_info">
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                    <TextView
+                        android:id="@+id/actividad"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Fútbol"
+                        android:textSize="16sp"
+                        android:fontFamily="@font/roboto"
+                        android:textColor="#49454F"
+                        android:textStyle="bold"/>
+                    <TextView
+                        android:id="@+id/fecha_hora"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="14/04/2025 08:00hs"
+                        android:textSize="16sp"
+                        android:textColor="#000000"
+                        android:fontFamily="@font/roboto" />
+            </LinearLayout>
+                <TextView
+                    android:id="@+id/actividad_precio"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="$1500"
+                    android:textSize="16sp"
+                    android:fontFamily="@font/roboto"
+                    android:textColor="#49454F"
+                    android:textStyle="bold"/>
+        </LinearLayout>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/siguienteButton"
+            style="@style/Base.Theme.SportsClub"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
+            android:background="@drawable/rounded_buttons"
+            android:text="@string/siguiente_button"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/actividad_info" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>
