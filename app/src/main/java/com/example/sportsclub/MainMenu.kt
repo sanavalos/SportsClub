@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
+import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -38,6 +39,13 @@ class MainMenu : AppCompatActivity() {
                 behavior.state = BottomSheetBehavior.STATE_EXPANDED
             }
 
+            val listaPagos = bottomSheetView.findViewById<TextView>(R.id.lista_pagos)
+            listaPagos.setOnClickListener {
+                dialog.dismiss()
+                val intent = Intent(this, PaymentListActivity::class.java)
+                startActivity(intent)
+            }
+
             dialog.show()
         }
 
@@ -47,12 +55,12 @@ class MainMenu : AppCompatActivity() {
             startActivity(intent)
         }
 
-
         val buttonNoSocio = findViewById<Button>(R.id.regNoSocio)
         buttonNoSocio.setOnClickListener {
             val intent = Intent(this, RegNoSocio::class.java)
             startActivity(intent)
         }
+
     }
 
 }

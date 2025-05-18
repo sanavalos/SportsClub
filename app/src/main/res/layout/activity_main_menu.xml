@@ -46,6 +46,8 @@
             android:textColor="@color/textSecondary"
             android:textSize="22sp"
             android:textStyle="italic"
+            android:layout_gravity="center"
+            android:gravity="center"
             app:layout_constraintStart_toStartOf="@+id/toolbar"
             app:layout_constraintTop_toTopOf="@+id/toolbar" />
 

@@ -3,7 +3,7 @@
     <string name="menu">Menú</string>
     <string name="registrar_socio">Registrar socio</string>
     <string name="registrar_no_socio">Registrar No Socio</string>
-    <string name="bienvenido_admin">¡Bienvenido, Admin!</string>
+    <string name="bienvenido_admin">¡BIENVENIDO, ADMIN!</string>
     <string name="alt_logo">Logo de Ráfaga Deportiva</string>
     <string name="email_inicio">E-MAIL</string>
     <string name="hint_correo">Ingrese su correo...</string>
@@ -29,6 +29,9 @@
     <string name="registrado">REGISTRADO</string>
     <string name="correctamente">CORRECTAMENTE</string>
     <string name="inicio">Inicio</string>
+    <string name="siguiente">SIGUIENTE</string>
     <string name="socio">SOCIO</string>
     <string name="no_socio">NO SOCIO</string>
+    <string name="payment_list">LISTA DE PAGOS</string>
+    <string name="insert_document">Ingrese documento...</string>
 </resources>

@@ -24,6 +24,7 @@
             android:padding="15dp" />
 
         <TextView
+            android:id="@+id/lista_pagos"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/lista_de_pagos_burger"
