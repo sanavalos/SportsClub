@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.text.InputType
 import android.widget.ArrayAdapter
 import android.widget.Button
+import android.widget.ImageView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -20,6 +21,12 @@ class DatosPagoActivity : AppCompatActivity() {
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
+        }
+
+        val menuBack = findViewById<ImageView>(R.id.backMenu)
+        menuBack.setOnClickListener {
+            val intent = Intent(this, ActividadesActivity::class.java)
+            startActivity(intent)
         }
 
         val pagoButton = findViewById<Button>(R.id.pagoButton)

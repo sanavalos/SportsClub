@@ -6,6 +6,7 @@ import android.util.SparseBooleanArray
 import android.widget.Button
 import android.widget.CheckedTextView
 import android.widget.ExpandableListView
+import android.widget.ImageView
 import android.widget.SimpleExpandableListAdapter
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -24,6 +25,13 @@ class ActividadesListaActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+
+        val menuBack = findViewById<ImageView>(R.id.backMenu)
+        menuBack.setOnClickListener {
+            val intent = Intent(this, MainMenu::class.java)
+            startActivity(intent)
+        }
+
         val siguienteButton = findViewById<Button>(R.id.siguienteButton)
         siguienteButton.setOnClickListener {
             val intent = Intent(this, ActividadesActivity::class.java)
