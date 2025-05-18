@@ -43,14 +43,14 @@ class MainMenu : AppCompatActivity() {
 
         val buttonSocio = findViewById<Button>(R.id.regSocio)
         buttonSocio.setOnClickListener {
-            val intent = Intent(this, RegSocio::class.java)
+            val intent = Intent(this, ListarVencimientosActivity::class.java)
             startActivity(intent)
         }
 
 
         val buttonNoSocio = findViewById<Button>(R.id.regNoSocio)
         buttonNoSocio.setOnClickListener {
-            val intent = Intent(this, RegNoSocio::class.java)
+            val intent = Intent(this, CarnetSocioActivity::class.java)
             startActivity(intent)
         }
     }
