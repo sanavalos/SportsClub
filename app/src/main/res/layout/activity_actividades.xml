@@ -10,7 +10,7 @@
         android:id="@+id/main"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:context=".ActividadesActivity"
+        tools:context=".ui.ActividadesActivity"
         android:background="@drawable/gradient_background">
 
         <ImageView
