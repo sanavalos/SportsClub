@@ -103,7 +103,7 @@
         <ExpandableListView
             android:id="@+id/expandableListView"
             android:layout_width="375dp"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             android:dividerHeight="2dp"
             android:groupIndicator="@null"
             android:padding="10dp"
@@ -111,6 +111,7 @@
             android:layout_marginTop="10dp"
             android:choiceMode="multipleChoice"
             app:layout_constraintTop_toBottomOf="@+id/search_bar"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
 
