@@ -186,47 +186,41 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
             android:layout_marginTop="24dp"
-            android:paddingVertical="16dp"
-            android:paddingHorizontal="12dp"
-            android:background="@drawable/background_form"
             android:orientation="horizontal"
             android:gravity="center_vertical"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/usuario_info">
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_weight="1"
+            <ScrollView
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
-                    <TextView
-                        android:id="@+id/actividad"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Fútbol"
-                        android:textSize="16sp"
-                        android:fontFamily="@font/roboto"
-                        android:textColor="#49454F"
-                        android:textStyle="bold"/>
-                    <TextView
-                        android:id="@+id/fecha_hora"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="14/04/2025 08:00hs"
-                        android:textSize="16sp"
-                        android:textColor="#000000"
-                        android:fontFamily="@font/roboto" />
-            </LinearLayout>
-                <TextView
-                    android:id="@+id/actividad_precio"
-                    android:layout_width="wrap_content"
+                android:layout_weight="1">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="$1500"
-                    android:textSize="16sp"
-                    android:fontFamily="@font/roboto"
-                    android:textColor="#49454F"
-                    android:textStyle="bold"/>
+                    android:orientation="vertical"
+                    >
+
+                    <LinearLayout
+                        android:id="@+id/activitiesContainer"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@android:color/darker_gray"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginBottom="16dp" />
+
+
+                </LinearLayout>
+
+            </ScrollView>
+
         </LinearLayout>
 
         <androidx.appcompat.widget.AppCompatButton
