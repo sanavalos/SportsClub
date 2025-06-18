@@ -2,6 +2,8 @@ package com.example.sportsclub.ui
 
 import android.content.Intent
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.SparseBooleanArray
 import android.widget.Button
 import android.widget.CheckedTextView
@@ -9,11 +11,13 @@ import android.widget.ExpandableListView
 import android.widget.ImageView
 import android.widget.SimpleExpandableListAdapter
 import android.widget.CalendarView
+import android.widget.EditText
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.sportsclub.R
+import com.example.sportsclub.database.ActividadConHorarios
 import com.example.sportsclub.database.ActividadRepository
 import java.text.SimpleDateFormat
 import java.util.*
@@ -22,6 +26,8 @@ class ActividadesListaActivity : AppCompatActivity() {
     private val checkedItems = HashMap<String, SparseBooleanArray>()
     private lateinit var actividadRepository: ActividadRepository
     private var actividadesData: List<Pair<String, List<String>>> = emptyList()
+    private var fullActividadList: List<ActividadConHorarios> = emptyList()
+    private var selectedDate: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,6 +42,18 @@ class ActividadesListaActivity : AppCompatActivity() {
         actividadRepository = ActividadRepository(this)
 
         setupUI()
+        val searchInput = findViewById<EditText>(R.id.search_input)
+
+        searchInput.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                filterActivities(s.toString())
+            }
+
+            override fun afterTextChanged(s: Editable?) {}
+        })
+
         val calendarView = findViewById<CalendarView>(R.id.calendarView)
         calendarView.setOnDateChangeListener { _, year, month, dayOfMonth ->
             val selectedDate = String.format("%04d-%02d-%02d", year, month + 1, dayOfMonth)
@@ -59,15 +77,41 @@ class ActividadesListaActivity : AppCompatActivity() {
         }
     }
 
+    private fun filterActivities(query: String) {
+
+        val filteredList = fullActividadList.filter { actividad ->
+            val matchesName = actividad.nombreActividad.contains(query, ignoreCase = true)
+            val sdfHorario = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
+            val sdfSelected = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+            val matchesDate = selectedDate == null || actividad.horarios.any { horario ->
+                try {
+                    val horarioDate = sdfHorario.parse(horario.trim())
+                    val horarioFormatted = sdfSelected.format(horarioDate!!)
+                    horarioFormatted == selectedDate
+                } catch (e: Exception) {
+                    false
+                }
+            }
+
+            matchesName && matchesDate
+        }
+
+        actividadesData = filteredList.map {
+            Pair(it.nombreActividad, it.horarios)
+        }
+
+        setupExpandableListView()
+    }
+
     private fun loadActivitiesFromDatabase() {
         try {
-            val actividadesConHorarios = actividadRepository.getActividadesConHorarios()
+            fullActividadList = actividadRepository.getActividadesConHorarios()
 
-            if (actividadesConHorarios.isEmpty()) {
+            if (fullActividadList.isEmpty()) {
                 return
             }
 
-            actividadesData = actividadesConHorarios.map { actividadConHorario ->
+            actividadesData = fullActividadList .map { actividadConHorario ->
                 Pair(actividadConHorario.nombreActividad, actividadConHorario.horarios)
             }
 
@@ -146,14 +190,9 @@ class ActividadesListaActivity : AppCompatActivity() {
 
     private fun loadActivitiesForDate(date: String) {
         try {
-            val actividadesConHorarios = actividadRepository.getActividadesPorFecha(date)
-
-            actividadesData = actividadesConHorarios.map { actividadConHorario ->
-                Pair(actividadConHorario.nombreActividad, actividadConHorario.horarios)
-            }
-
-            setupExpandableListView()
-
+            selectedDate = date
+            fullActividadList = actividadRepository.getActividadesPorFecha(date) // <-- use DB filter
+            filterActivities(findViewById<EditText>(R.id.search_input).text.toString()) // still allows text search
         } catch (e: Exception) {
             e.printStackTrace()
         }
