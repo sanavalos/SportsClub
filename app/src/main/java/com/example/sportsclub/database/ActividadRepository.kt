@@ -1,6 +1,7 @@
 package com.example.sportsclub.database
 
 import android.content.Context
+import com.example.sportsclub.models.Actividad
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -160,6 +161,65 @@ class ActividadRepository(context: Context) {
         } catch (e: Exception) {
             dbDateTime
         }
+    }
+
+    fun getActividadByName(nombreActividad: String): Actividad? {
+        val db = dbHelper.readableDatabase
+        val cursor = db.query(
+            "Actividades",
+            arrayOf("id_actividad", "nombre_actividad", "precio"),
+            "nombre_actividad = ?",
+            arrayOf(nombreActividad),
+            null,
+            null,
+            null
+        )
+
+        return if (cursor.moveToFirst()) {
+            val actividad = Actividad(
+                idActividad = cursor.getInt(cursor.getColumnIndexOrThrow("id_actividad")),
+                nombreActividad = cursor.getString(cursor.getColumnIndexOrThrow("nombre_actividad")),
+                precio = cursor.getDouble(cursor.getColumnIndexOrThrow("precio"))
+            )
+            cursor.close()
+            actividad
+        } else {
+            cursor.close()
+            null
+        }
+    }
+
+    fun getActividadProgramadaId(idActividad: Int, fechaHora: String): Int {
+        val db = dbHelper.readableDatabase
+
+        val inputFormat = SimpleDateFormat("dd/MM/yyyy HH:mm", Locale.getDefault())
+        val outputFormat = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault())
+
+        val formattedDateTime = try {
+            val date = inputFormat.parse(fechaHora)
+            outputFormat.format(date!!)
+        } catch (e: Exception) {
+            fechaHora
+        }
+
+        val cursor = db.query(
+            "Actividades_Programadas",
+            arrayOf("id_actividad_programada"),
+            "id_actividad = ? AND fecha_hora LIKE ?",
+            arrayOf(idActividad.toString(), "%$formattedDateTime%"),
+            null,
+            null,
+            null
+        )
+
+        val id = if (cursor.moveToFirst()) {
+            cursor.getInt(cursor.getColumnIndexOrThrow("id_actividad_programada"))
+        } else {
+            0
+        }
+
+        cursor.close()
+        return id
     }
 
     fun getActividadesConPrecios(): Map<String, Double> {
