@@ -8,14 +8,20 @@ import android.widget.CheckedTextView
 import android.widget.ExpandableListView
 import android.widget.ImageView
 import android.widget.SimpleExpandableListAdapter
+import android.widget.CalendarView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.sportsclub.R
+import com.example.sportsclub.database.ActividadRepository
+import java.text.SimpleDateFormat
+import java.util.*
 
 class ActividadesListaActivity : AppCompatActivity() {
     private val checkedItems = HashMap<String, SparseBooleanArray>()
+    private lateinit var actividadRepository: ActividadRepository
+    private var actividadesData: List<Pair<String, List<String>>> = emptyList()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,6 +33,18 @@ class ActividadesListaActivity : AppCompatActivity() {
             insets
         }
 
+        actividadRepository = ActividadRepository(this)
+
+        setupUI()
+        val calendarView = findViewById<CalendarView>(R.id.calendarView)
+        calendarView.setOnDateChangeListener { _, year, month, dayOfMonth ->
+            val selectedDate = String.format("%04d-%02d-%02d", year, month + 1, dayOfMonth)
+            loadActivitiesForDate(selectedDate)
+        }
+        loadActivitiesFromDatabase()
+    }
+
+    private fun setupUI() {
         val menuBack = findViewById<ImageView>(R.id.backMenu)
         menuBack.setOnClickListener {
             val intent = Intent(this, MainMenu::class.java)
@@ -35,18 +53,36 @@ class ActividadesListaActivity : AppCompatActivity() {
 
         val siguienteButton = findViewById<Button>(R.id.siguienteButton)
         siguienteButton.setOnClickListener {
+            val selectedActivities = getCheckedItems()
             val intent = Intent(this, ActividadesActivity::class.java)
             startActivity(intent)
         }
+    }
 
+    private fun loadActivitiesFromDatabase() {
+        try {
+            val actividadesConHorarios = actividadRepository.getActividadesConHorarios()
+
+            if (actividadesConHorarios.isEmpty()) {
+                return
+            }
+
+            actividadesData = actividadesConHorarios.map { actividadConHorario ->
+                Pair(actividadConHorario.nombreActividad, actividadConHorario.horarios)
+            }
+
+            setupExpandableListView()
+
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+    }
+
+    private fun setupExpandableListView() {
         val expandableListView = findViewById<ExpandableListView>(R.id.expandableListView)
 
-        val groupList = listOf("FÚTBOL", "VOLEY", "BÁSQUETBOL")
-        val childMapping = mapOf(
-            "FÚTBOL" to listOf("14/04/2025 08:00hs", "14/04/2025 17:00hs", "14/04/2025 21:00hs"),
-            "VOLEY" to listOf("14/04/2025 09:00hs", "14/04/2025 18:00hs", "14/04/2025 22:00hs"),
-            "BÁSQUETBOL" to listOf("14/04/2025 10:00hs", "14/04/2025 19:00hs")
-        )
+        val groupList = actividadesData.map { it.first }
+        val childMapping = actividadesData.associate { it.first to it.second }
 
         groupList.forEach { group ->
             val itemCount = childMapping[group]?.size ?: 0
@@ -95,18 +131,31 @@ class ActividadesListaActivity : AppCompatActivity() {
                 val isChecked = checkedArray.valueAt(i)
 
                 if (isChecked) {
-                    val childItem = when (group) {
-                        "FÚTBOL" -> listOf("14/04/2025 08:00hs", "14/04/2025 17:00hs", "14/04/2025 21:00hs")[position]
-                        "VOLEY" -> listOf("14/04/2025 09:00hs", "14/04/2025 18:00hs", "14/04/2025 22:00hs")[position]
-                        "BÁSQUETBOL" -> listOf("14/04/2025 10:00hs", "14/04/2025 19:00hs")[position]
-                        else -> ""
-                    }
+                    val groupData = actividadesData.find { it.first == group }
+                    val childItem = groupData?.second?.getOrNull(position) ?: ""
 
-                    result.add(Pair(group, childItem))
+                    if (childItem.isNotEmpty()) {
+                        result.add(Pair(group, childItem))
+                    }
                 }
             }
         }
 
         return result
+    }
+
+    private fun loadActivitiesForDate(date: String) {
+        try {
+            val actividadesConHorarios = actividadRepository.getActividadesPorFecha(date)
+
+            actividadesData = actividadesConHorarios.map { actividadConHorario ->
+                Pair(actividadConHorario.nombreActividad, actividadConHorario.horarios)
+            }
+
+            setupExpandableListView()
+
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
     }
 }
