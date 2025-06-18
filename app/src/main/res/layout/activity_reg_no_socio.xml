@@ -86,7 +86,9 @@
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/toolbar">
 
+
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/editTextNombre"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/background_form"
@@ -114,6 +116,7 @@
             app:layout_constraintVertical_bias="0.4">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/editTextApellido"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/background_form"
@@ -138,6 +141,7 @@
             app:layout_constraintTop_toBottomOf="@+id/toolbar">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/editTextTelefono"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/background_form"
@@ -162,6 +166,7 @@
             app:layout_constraintTop_toBottomOf="@+id/celular_no_socio">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/editTextDireccion"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/background_form"
@@ -210,6 +215,7 @@
             app:layout_constraintTop_toBottomOf="@+id/domicilio_no_socio">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/editTextDocumento"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/background_form"
