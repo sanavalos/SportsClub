@@ -1,7 +1,12 @@
 package com.example.sportsclub.models
 
-data class Actividad(
-    val idActividad: Int,
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
+
+@Parcelize
+data class SelectedActividadData(
+    val idActividadProgramada: Int,
     val nombreActividad: String,
-    val precio: Double
-)
+    val precio: Double,
+    val fechaHora: String
+) : Parcelable
