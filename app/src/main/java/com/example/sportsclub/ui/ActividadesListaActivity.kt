@@ -19,6 +19,7 @@ import androidx.core.view.WindowInsetsCompat
 import com.example.sportsclub.R
 import com.example.sportsclub.database.ActividadConHorarios
 import com.example.sportsclub.database.ActividadRepository
+import com.example.sportsclub.models.SelectedActividadData
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -72,13 +73,17 @@ class ActividadesListaActivity : AppCompatActivity() {
         val siguienteButton = findViewById<Button>(R.id.siguienteButton)
         siguienteButton.setOnClickListener {
             val selectedActivities = getCheckedItems()
+            println("selectedActivities: $selectedActivities")
+
+            val selectedActividadesData = getSelectedActividadesWithDetails(selectedActivities)
+            val parcelableList = selectedActividadesData as ArrayList<SelectedActividadData>
             val intent = Intent(this, ActividadesActivity::class.java)
+            intent.putParcelableArrayListExtra("selected_activities", parcelableList)
             startActivity(intent)
         }
     }
 
     private fun filterActivities(query: String) {
-
         val filteredList = fullActividadList.filter { actividad ->
             val matchesName = actividad.nombreActividad.contains(query, ignoreCase = true)
             val sdfHorario = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
@@ -111,7 +116,7 @@ class ActividadesListaActivity : AppCompatActivity() {
                 return
             }
 
-            actividadesData = fullActividadList .map { actividadConHorario ->
+            actividadesData = fullActividadList.map { actividadConHorario ->
                 Pair(actividadConHorario.nombreActividad, actividadConHorario.horarios)
             }
 
@@ -188,11 +193,33 @@ class ActividadesListaActivity : AppCompatActivity() {
         return result
     }
 
+    private fun getSelectedActividadesWithDetails(selectedActivities: List<Pair<String, String>>): List<SelectedActividadData> {
+        val result = mutableListOf<SelectedActividadData>()
+
+        selectedActivities.forEach { (activityName, schedule) ->
+            val actividadDetails = actividadRepository.getActividadByName(activityName)
+            actividadDetails?.let { actividad ->
+                val actividadProgramadaId = actividadRepository.getActividadProgramadaId(actividad.idActividad, schedule)
+
+                result.add(
+                    SelectedActividadData(
+                        idActividadProgramada = actividadProgramadaId,
+                        nombreActividad = actividad.nombreActividad,
+                        precio = actividad.precio,
+                        fechaHora = schedule
+                    )
+                )
+            }
+        }
+
+        return result
+    }
+
     private fun loadActivitiesForDate(date: String) {
         try {
             selectedDate = date
-            fullActividadList = actividadRepository.getActividadesPorFecha(date) // <-- use DB filter
-            filterActivities(findViewById<EditText>(R.id.search_input).text.toString()) // still allows text search
+            fullActividadList = actividadRepository.getActividadesPorFecha(date)
+            filterActivities(findViewById<EditText>(R.id.search_input).text.toString())
         } catch (e: Exception) {
             e.printStackTrace()
         }
