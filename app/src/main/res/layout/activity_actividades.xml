@@ -129,7 +129,6 @@
                 android:id="@+id/numero_usuario"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="12.345.678"
                 android:textColor="@color/text"
                 android:textStyle="bold|italic"
                 android:textSize="18dp"
