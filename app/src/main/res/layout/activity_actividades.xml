@@ -160,7 +160,6 @@
                 android:id="@+id/textView4"
                 android:layout_width="147dp"
                 android:layout_height="19dp"
-                android:text="JUANA PEREZ"
                 android:textColor="@color/textHint"
                 android:textStyle="bold"
                 />
@@ -169,14 +168,12 @@
                 android:id="@+id/textView5"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="DOCUMENTO: 12.345.678"
                 android:textColor="@color/textHint" />
 
             <TextView
                 android:id="@+id/textView6"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="ESTADO: NO SOCIO"
                 android:textColor="@color/textHint" />
         </LinearLayout>
 
