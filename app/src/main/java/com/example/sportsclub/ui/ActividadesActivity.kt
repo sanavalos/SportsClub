@@ -21,6 +21,7 @@ import java.util.Locale
 
 class ActividadesActivity : AppCompatActivity() {
     private var selectedActivities: List<SelectedActividadData>? = null
+    private var usuarioSeleccionado: Usuario? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -65,14 +66,25 @@ class ActividadesActivity : AppCompatActivity() {
 
         val siguienteButton = findViewById<Button>(R.id.siguienteButton)
         siguienteButton.setOnClickListener {
-            val intent = Intent(this, DatosPagoActivity::class.java)
-            val selectedIds = selectedActivities?.map { it.idActividadProgramada }?.toIntArray()
-            intent.putExtra("selected_activity_ids", selectedIds)
-            startActivity(intent)
+            val usuario = usuarioSeleccionado
+            val actividades = selectedActivities
+
+            if (usuario != null && actividades != null) {
+                val actividadesIds = ArrayList(actividades.map { it.idActividadProgramada })
+                val intent = Intent(this, DatosPagoActivity::class.java).apply {
+                    putExtra("idUsuario", usuario.idUsuario)
+                    putExtra("tipo", "noSocio")
+                    putIntegerArrayListExtra("actividades", actividadesIds)
+                }
+                startActivity(intent)
+            } else {
+                Toast.makeText(this, "Buscá y seleccioná un usuario", Toast.LENGTH_SHORT).show()
+            }
         }
     }
 
     private fun mostrarUsuario(usuario: Usuario) {
+        usuarioSeleccionado = usuario
         val mensajeResultado = findViewById<TextView>(R.id.mensaje_resultado)
         val numeroUsuario = findViewById<TextView>(R.id.numero_usuario)
         val textViewNombre = findViewById<TextView>(R.id.textView4)
