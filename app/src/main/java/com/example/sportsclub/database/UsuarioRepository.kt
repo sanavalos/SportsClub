@@ -10,7 +10,7 @@ import java.util.Locale
 class UsuarioRepository(context: Context) {
     private val dbHelper = UserDBHelper(context)
 
-    fun obtenerUsuarioYPagosPorDocumento(documento: String): UsuarioPago? {
+    fun obtenerUsuarioYPagosPorDocumento(doc: String): UsuarioPago? {
         val db = dbHelper.readableDatabase
 
         val query = """
@@ -20,7 +20,7 @@ class UsuarioRepository(context: Context) {
         WHERE u.documento = ?
     """.trimIndent()
 
-        val cursor = db.rawQuery(query, arrayOf(documento))
+        val cursor = db.rawQuery(query, arrayOf(doc))
         var datosUsuarioPago: UsuarioPago? = null
 
         if (cursor.moveToFirst()) {
@@ -41,7 +41,7 @@ class UsuarioRepository(context: Context) {
         return datosUsuarioPago
     }
 
-    fun obtenerPagosPorIdUsuario(idUsuario: Int): List<Pago> {
+    fun obtenerPagosPorIdUsuario(usuarioId: Int): List<Pago> {
         val pagos = mutableListOf<Pago>()
         val db = dbHelper.readableDatabase
 
@@ -51,7 +51,7 @@ class UsuarioRepository(context: Context) {
         WHERE id_usuario = ?
     """.trimIndent()
 
-        val cursor = db.rawQuery(query, arrayOf(idUsuario.toString()))
+        val cursor = db.rawQuery(query, arrayOf(usuarioId.toString()))
 
         if (cursor.moveToFirst()) {
             do {

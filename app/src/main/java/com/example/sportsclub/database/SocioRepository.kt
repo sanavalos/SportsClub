@@ -1,6 +1,7 @@
 package com.example.sportsclub.database
 
 import android.content.Context
+import com.example.sportsclub.models.DatosSocio
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
@@ -50,5 +51,40 @@ class SocioRepository(context: Context) {
         cursor.close()
         db.close()
         return montoMensual
+    }
+
+    fun obtenerSociosConVencimientoHoy(): List<DatosSocio> {
+        val sociosConVencimientoHoy = mutableListOf<DatosSocio>()
+        val db = dbHelper.readableDatabase
+
+        val formato = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+        val fechaHoy = formato.format(Date())
+
+        val cursor = db.rawQuery(
+            """
+        SELECT u.id_usuario ,u.nombre, u.apellido, u.documento, s.imagen_carnet
+        FROM Usuarios u
+        JOIN Socios s ON u.id_usuario = s.id_usuario
+        WHERE s.fecha_vencimiento = ?
+        """.trimIndent(),
+            arrayOf(fechaHoy)
+        )
+
+        if (cursor.moveToFirst()) {
+            do {
+                val idUsuario = cursor.getInt(0)
+                val nombre = cursor.getString(1)
+                val apellido = cursor.getString(2)
+                val documento = cursor.getString(3)
+                val imagenCarnet = cursor.getBlob(4)
+
+                sociosConVencimientoHoy.add(DatosSocio(idUsuario, nombre, apellido, documento, imagenCarnet))
+            } while (cursor.moveToNext())
+        }
+
+        cursor.close()
+        db.close()
+
+        return sociosConVencimientoHoy
     }
 }
