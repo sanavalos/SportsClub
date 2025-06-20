@@ -72,6 +72,7 @@
             app:layout_constraintTop_toBottomOf="@+id/toolbar">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/editTextMonto"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/background_form"
@@ -80,7 +81,6 @@
                 android:paddingTop="12dp"
                 android:paddingBottom="12dp"
                 android:textStyle="italic"
-                android:text="$10.000"
                 android:textColor="@color/textHint"
                 android:inputType="none"
                 android:focusable="false"
@@ -118,14 +118,12 @@
                 <RadioButton
                     android:id="@+id/efectivoRadio"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Efectivo" />
+                    android:layout_height="wrap_content"/>
 
                 <RadioButton
                     android:id="@+id/tarjetaRadio"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Tarjeta de Crédito" />
+                    android:layout_height="wrap_content"/>
 
             </RadioGroup>
         </LinearLayout>
@@ -134,6 +132,7 @@
             android:id="@+id/cantidad_cuotas"
             style="@style/Base.Theme.SportsClub"
             app:layout_constraintTop_toBottomOf="@+id/formas_pago"
+            android:visibility="gone"
             android:layout_width="345dp"
             android:layout_height="50dp"
             android:layout_marginTop="10dp"

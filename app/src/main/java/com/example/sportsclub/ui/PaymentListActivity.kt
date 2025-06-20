@@ -17,10 +17,23 @@ import android.widget.ImageView
 import android.view.inputmethod.EditorInfo
 import android.view.View
 import android.content.Intent
+import android.widget.Toast
 import com.example.sportsclub.R
+import com.example.sportsclub.database.SocioRepository
+import com.example.sportsclub.database.UsuarioRepository
+import com.example.sportsclub.models.Pago
+import java.text.SimpleDateFormat
+import java.util.Calendar
+import java.util.Date
+import java.util.Locale
 
 
 class PaymentListActivity : AppCompatActivity() {
+    private var estadoPago: Int = 0
+    private var pagoPendiente: Pago? = null
+    private lateinit var adapterSocio: PaymentAdapter
+    private lateinit var adapterNoSocio: PaymentNoSocioAdapter
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -30,44 +43,6 @@ class PaymentListActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
-
-        val usuarios = listOf(
-            mapOf(
-                "nombre" to "JUAN PEREZ",
-                "dni" to "12345678",
-                "rol" to "Socio",
-                "pagos" to listOf(
-                    mapOf("mes" to "Enero 2025", "estado" to true),
-                    mapOf("mes" to "Febrero 2025", "estado" to false),
-                    mapOf("mes" to "Marzo 2025", "estado" to true),
-                    mapOf("mes" to "Abril 2025", "estado" to false)
-                )
-            ),
-            mapOf(
-                "nombre" to "JOSÉ RODRIGUEZ",
-                "dni" to "87654321",
-                "rol" to "No Socio",
-                "pagos" to listOf(
-                    mapOf("actividad" to "Fútbol", "fecha" to "12/04/2025 17:00hs"),
-                    mapOf("actividad" to "Voley", "fecha" to "04/04/2025 12:00hs"),
-                    mapOf("actividad" to "Fútbol", "fecha" to "04/04/2025 17:00hs"),
-                    mapOf("actividad" to "Tenis", "fecha" to "25/03/2025 18:00hs"),
-                    mapOf("actividad" to "Básquetbol", "fecha" to "10/02/2025 14:00hs")
-                )
-            ),
-            mapOf(
-                "nombre" to "JULIANA GONZALEZ",
-                "dni" to "23456789",
-                "rol" to "Socio",
-                "pagos" to listOf(
-                    mapOf("mes" to "Mayo 2025", "estado" to true),
-                    mapOf("mes" to "Junio 2025", "estado" to false),
-                    mapOf("mes" to "Julio 2025", "estado" to false),
-                    mapOf("mes" to "Agosto 2025", "estado" to true),
-                    mapOf("mes" to "Septiembre 2025", "estado" to true)
-                )
-            )
-        )
 
         fun formatearDNI(dni: String): String {
             return dni.reversed()
@@ -95,19 +70,32 @@ class PaymentListActivity : AppCompatActivity() {
         }
 
         nextButton.setOnClickListener {
-            val intent = Intent(this, DatosPagoActivity::class.java)
-            startActivity(intent)
+            val seleccion = adapterSocio.obtenerPagoSeleccionado()
+
+            if (seleccion != null) {
+                val (pago, estado) = seleccion
+
+                val intent = Intent(this, DatosPagoActivity::class.java).apply {
+                    putExtra("idUsuario", pago.idUsuario)
+                    putExtra("estadoPago", estado)
+                    putExtra("tipo", "socio")
+                }
+                startActivity(intent)
+            } else {
+                Toast.makeText(this, "Debe seleccionar una cuota a pagar", Toast.LENGTH_SHORT).show()
+            }
         }
 
         fun realizarBusqueda() {
             val dni = searchInput.text.toString()
 
             if (dni.isNotEmpty()) {
-                val usuarioEncontrado = usuarios.find { it["dni"] == dni }
+                val repo = UsuarioRepository(this)
+                val usuarioEncontrado = repo.obtenerUsuarioYPagosPorDocumento(dni)
 
                 if (usuarioEncontrado != null) {
 
-                    if (usuarioEncontrado["rol"]?.toString()?.equals("Socio", ignoreCase = true) == true) {
+                    if (usuarioEncontrado.idTipoUsuario == 2) {
 
                         labelBusquedaGenerico.visibility = View.VISIBLE
                         labelBusqueda.text = formatearDNI(dni)
@@ -117,25 +105,98 @@ class PaymentListActivity : AppCompatActivity() {
                         recyclerViewNoSocio.visibility = View.GONE
                         nextButton.visibility = View.VISIBLE
 
-                        val nombre = usuarioEncontrado["nombre"] as? String ?: ""
-                        val dniUsuario = usuarioEncontrado["dni"] as? String ?: ""
-                        val rol = usuarioEncontrado["rol"] as? String ?: ""
+                        val nombre = usuarioEncontrado.nombre
+                        val apellido = usuarioEncontrado.apellido
+                        val dniUsuario = usuarioEncontrado.documento
+                        val rol = usuarioEncontrado.nombreTipoUsuario
+                        val pagos = usuarioEncontrado.pagos
 
-                        textNombre.text = nombre
+                        textNombre.text = "${nombre} ${apellido}"
                         textDocumento.text = "DOCUMENTO: ${formatearDNI(dniUsuario)}"
                         textEstado.text = "ESTADO: ${rol}"
 
-                        val pagosMap = usuarioEncontrado["pagos"] as? List<Map<String, Any>>
-                        if (pagosMap != null) {
-                            val pagos = pagosMap.map { pago ->
-                                val mes = pago["mes"] as? String ?: ""
-                                val estado = pago["estado"] as? Boolean ?: false
-                                mes to estado
+                        if (pagos != null) {
+                            val socioRepository = SocioRepository(this)
+                            val fechaVencimiento =  socioRepository.obtenerFechaVencimientoCuotaSocio(usuarioEncontrado.idUsuario)
+
+                            if(fechaVencimiento == null && usuarioEncontrado.pagos.isEmpty())
+                            {
+                                estadoPago = 1
+                                pagoPendiente = Pago(
+                                    idPago = -1,
+                                    idFormaPago = -1 ,
+                                    idUsuario = usuarioEncontrado.idUsuario,
+                                    fechaPago = Date(),
+                                    monto = -1.0,
+                                    cantCuotas = -1
+                                )
+                            } else
+                            {
+                                val hoy = resetHora(Calendar.getInstance())
+                                val vencimiento = resetHora(Calendar.getInstance()).apply { time = fechaVencimiento }
+
+                                if (hoy.after(vencimiento)) {
+                                    estadoPago = 2
+                                    pagoPendiente = Pago(
+                                        idPago = -1,
+                                        idFormaPago = -1 ,
+                                        idUsuario = usuarioEncontrado.idUsuario,
+                                        fechaPago = fechaVencimiento,
+                                        monto = -1.0,
+                                        cantCuotas = -1
+                                    )
+                                } else {
+                                    val millisDiferencia = vencimiento.timeInMillis - hoy.timeInMillis
+                                    val diasRestantes = (millisDiferencia / (1000 * 60 * 60 * 24)).toInt()
+
+                                    when {
+                                        diasRestantes in 0..7 -> {
+                                            estadoPago = 3
+                                            pagoPendiente = Pago(
+                                                idPago = -1,
+                                                idFormaPago = -1,
+                                                idUsuario = usuarioEncontrado.idUsuario,
+                                                fechaPago = fechaVencimiento,
+                                                monto = -1.0,
+                                                cantCuotas = -1
+                                            )
+                                        }
+                                        diasRestantes in 8..30 -> {
+                                            estadoPago = 4
+                                            pagoPendiente = Pago(
+                                                idPago = -1,
+                                                idFormaPago = -1,
+                                                idUsuario = usuarioEncontrado.idUsuario,
+                                                fechaPago = fechaVencimiento,
+                                                monto = -1.0,
+                                                cantCuotas = -1
+                                            )
+                                        }
+                                    }
+                                }
                             }
 
-                            val adapter = PaymentAdapter(pagos)
+                            val pagosVisuales = normalizarFechasParaVisualizacion(pagos)
+                                .sortedByDescending { it.second }
 
-                            recyclerView.adapter = adapter
+                            val fechasOcupadas = pagosVisuales.map {
+                                SimpleDateFormat("yyyy-MM", Locale.getDefault()).format(it.second)
+                            }.toSet()
+
+                            val pagoDinamicoVisual = pagoPendiente?.let {
+                                val fechaVisual = calcularFechaVisualParaDinamico(it, fechasOcupadas)
+                                it to fechaVisual
+                            }
+
+                            adapterSocio = PaymentAdapter(
+                                pagosVisuales,
+                                pagoDinamicoVisual,
+                                estadoPago
+                            ) { pago, estado ->
+                                Toast.makeText(this, "Seleccionado: ${pago.idPago}, estado: $estado", Toast.LENGTH_SHORT).show()
+                            }
+
+                            recyclerView.adapter = adapterSocio
                             recyclerView.layoutManager = LinearLayoutManager(this)
                         }
                     } else {
@@ -147,25 +208,22 @@ class PaymentListActivity : AppCompatActivity() {
                         recyclerViewNoSocio.visibility = View.VISIBLE
                         nextButton.visibility = View.GONE
 
-                        val nombre = usuarioEncontrado["nombre"] as? String ?: ""
-                        val dniUsuario = usuarioEncontrado["dni"] as? String ?: ""
-                        val rol = usuarioEncontrado["rol"] as? String ?: ""
+                        val nombre = usuarioEncontrado.nombre
+                        val apellido = usuarioEncontrado.apellido
+                        val dniUsuario = usuarioEncontrado.documento
+                        val rol = usuarioEncontrado.nombreTipoUsuario
+                        val pagos = usuarioEncontrado.pagos
 
-                        textNombre.text = nombre
+                        textNombre.text = "${nombre} ${apellido}"
                         textDocumento.text = "DOCUMENTO: ${formatearDNI(dniUsuario)}"
                         textEstado.text = "ESTADO: ${rol}"
 
-                        val pagosMap = usuarioEncontrado["pagos"] as? List<Map<String, Any>>
-                        if (pagosMap != null) {
-                            val pagos = pagosMap.map { pago ->
-                                val actividad = pago["actividad"] as? String ?: ""
-                                val fecha = pago["fecha"] as? String ?: ""
-                                actividad to fecha
+                        if (pagos != null) {
+                            adapterNoSocio = PaymentNoSocioAdapter(pagos){ pagoSeleccionado ->
+                                Toast.makeText(this, "Pago seleccionado: ${pagoSeleccionado.idPago}", Toast.LENGTH_SHORT).show()
                             }
 
-                            val adapter = PaymentNoSocioAdapter(pagos)
-
-                            recyclerViewNoSocio.adapter = adapter
+                            recyclerViewNoSocio.adapter = adapterNoSocio
                             recyclerViewNoSocio.layoutManager = LinearLayoutManager(this)
                         }
                     }
@@ -191,5 +249,44 @@ class PaymentListActivity : AppCompatActivity() {
         searchIcon.setOnClickListener {
             realizarBusqueda()
         }
+    }
+
+    fun resetHora(cal: Calendar): Calendar {
+        cal.set(Calendar.HOUR_OF_DAY, 0)
+        cal.set(Calendar.MINUTE, 0)
+        cal.set(Calendar.SECOND, 0)
+        cal.set(Calendar.MILLISECOND, 0)
+        return cal
+    }
+
+    fun normalizarFechasParaVisualizacion(pagos: List<Pago>): List<Pair<Pago, Date>> {
+        val formato = SimpleDateFormat("yyyy-MM", Locale.getDefault())
+        val fechasAsignadas = mutableSetOf<String>()
+        val resultado = mutableListOf<Pair<Pago, Date>>()
+
+        for (pago in pagos.sortedBy { it.fechaPago }) {
+            var fecha = pago.fechaPago ?: continue
+            val calendar = Calendar.getInstance().apply { time = fecha }
+
+            while (formato.format(calendar.time) in fechasAsignadas) {
+                calendar.add(Calendar.MONTH, 1)
+            }
+
+            fechasAsignadas.add(formato.format(calendar.time))
+            resultado.add(pago to calendar.time)
+        }
+
+        return resultado
+    }
+
+    fun calcularFechaVisualParaDinamico(pago: Pago, fechasOcupadas: Set<String>): Date {
+        val formato = SimpleDateFormat("yyyy-MM", Locale.getDefault())
+        val calendar = Calendar.getInstance().apply { time = pago.fechaPago ?: Date() }
+
+        while (formato.format(calendar.time) in fechasOcupadas) {
+            calendar.add(Calendar.MONTH, 1)
+        }
+
+        return calendar.time
     }
 }
