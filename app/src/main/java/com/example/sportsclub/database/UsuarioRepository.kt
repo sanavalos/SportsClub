@@ -8,7 +8,6 @@ import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
 import com.example.sportsclub.models.Usuario
-import com.example.sportsclub.models.Usuario
 
 class UsuarioRepository(context: Context) {
     private val dbHelper = UserDBHelper(context)
