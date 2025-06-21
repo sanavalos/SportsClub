@@ -3,6 +3,7 @@ package com.example.sportsclub.database
 import android.content.ContentValues
 import android.content.Context
 import com.example.sportsclub.models.ActividadProgramada
+import com.example.sportsclub.models.DatosActividadProgramada
 import com.example.sportsclub.models.Pago
 import java.text.SimpleDateFormat
 import java.util.Calendar
@@ -166,5 +167,40 @@ class PagoRepository(private val context: Context) {
         }
 
         return success
+    }
+
+    fun obtenerActividadesProgramadasPorPago(idPago: Int): List<DatosActividadProgramada> {
+        val db = dbHelper.readableDatabase
+        val actividadesProgramadas = mutableListOf<DatosActividadProgramada>()
+
+        val query = """
+        SELECT ap.id_actividad_programada, a.nombre_actividad, ap.fecha_hora
+        FROM Actividades_Contratadas ac
+        JOIN Actividades_Programadas ap ON ac.id_actividad_programada = ap.id_actividad_programada
+        JOIN Actividades a ON a.id_actividad = ap.id_actividad
+        WHERE ac.id_pago = ?
+    """.trimIndent()
+
+        val cursor = db.rawQuery(query, arrayOf(idPago.toString()))
+
+        if (cursor.moveToFirst()) {
+            do {
+                val idActividadProgramada = cursor.getInt(0)
+                val nombreActividad = cursor.getString(1)
+                val fechaStr = cursor.getString(2)
+
+                var fecha: Date? = null
+                if (!fechaStr.isNullOrEmpty())
+                {
+                    val formato = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault())
+                    fecha = formato.parse(fechaStr)
+                }
+                actividadesProgramadas.add(DatosActividadProgramada(idActividadProgramada, nombreActividad,fecha))
+            } while (cursor.moveToNext())
+        }
+
+        cursor.close()
+        db.close()
+        return actividadesProgramadas
     }
 }

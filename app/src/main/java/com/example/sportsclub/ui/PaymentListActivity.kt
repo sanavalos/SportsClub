@@ -1,5 +1,6 @@
 package com.example.sportsclub.ui
 
+import android.content.Context
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -17,6 +18,8 @@ import android.widget.ImageView
 import android.view.inputmethod.EditorInfo
 import android.view.View
 import android.content.Intent
+import android.view.LayoutInflater
+import android.widget.Button
 import android.widget.Toast
 import com.example.sportsclub.R
 import com.example.sportsclub.database.SocioRepository
@@ -26,6 +29,13 @@ import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Date
 import java.util.Locale
+import android.graphics.Bitmap
+import android.graphics.Canvas
+import android.content.ContentValues
+import android.provider.MediaStore
+import android.os.Build
+import com.example.sportsclub.database.PagoRepository
+import com.example.sportsclub.models.UsuarioPago
 
 
 class PaymentListActivity : AppCompatActivity() {
@@ -42,13 +52,6 @@ class PaymentListActivity : AppCompatActivity() {
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
-        }
-
-        fun formatearDNI(dni: String): String {
-            return dni.reversed()
-                .chunked(3)
-                .joinToString(".")
-                .reversed()
         }
 
         val searchInput = findViewById<EditText>(R.id.searchInput)
@@ -89,6 +92,11 @@ class PaymentListActivity : AppCompatActivity() {
         fun realizarBusqueda() {
             val dni = searchInput.text.toString()
 
+            if (dni.isEmpty())
+            {
+                Toast.makeText(this, "Debe ingresar un documento", Toast.LENGTH_SHORT).show()
+            }
+
             if (dni.isNotEmpty()) {
                 val repo = UsuarioRepository(this)
                 val usuarioEncontrado = repo.obtenerUsuarioYPagosPorDocumento(dni)
@@ -97,6 +105,7 @@ class PaymentListActivity : AppCompatActivity() {
 
                     if (usuarioEncontrado.idTipoUsuario == 2) {
 
+                        labelBusquedaGenerico.text = "Mostrando resultados para:"
                         labelBusquedaGenerico.visibility = View.VISIBLE
                         labelBusqueda.text = formatearDNI(dni)
                         labelBusqueda.visibility = View.VISIBLE
@@ -115,10 +124,11 @@ class PaymentListActivity : AppCompatActivity() {
                         textDocumento.text = "DOCUMENTO: ${formatearDNI(dniUsuario)}"
                         textEstado.text = "ESTADO: ${rol}"
 
-                        if (pagos != null) {
-                            val socioRepository = SocioRepository(this)
-                            val fechaVencimiento =  socioRepository.obtenerFechaVencimientoCuotaSocio(usuarioEncontrado.idUsuario)
+                        val socioRepository = SocioRepository(this)
+                        val fechaVencimiento =  socioRepository.obtenerFechaVencimientoCuotaSocio(usuarioEncontrado.idUsuario)
+                        val monto =  socioRepository.obtenerMontoMensualPlanSocio(usuarioEncontrado.idUsuario) ?: 0.0
 
+                        if (pagos != null) {
                             if(fechaVencimiento == null && usuarioEncontrado.pagos.isEmpty())
                             {
                                 estadoPago = 1
@@ -127,7 +137,7 @@ class PaymentListActivity : AppCompatActivity() {
                                     idFormaPago = -1 ,
                                     idUsuario = usuarioEncontrado.idUsuario,
                                     fechaPago = Date(),
-                                    monto = -1.0,
+                                    monto = monto,
                                     cantCuotas = -1
                                 )
                             } else
@@ -142,7 +152,7 @@ class PaymentListActivity : AppCompatActivity() {
                                         idFormaPago = -1 ,
                                         idUsuario = usuarioEncontrado.idUsuario,
                                         fechaPago = fechaVencimiento,
-                                        monto = -1.0,
+                                        monto = monto,
                                         cantCuotas = -1
                                     )
                                 } else {
@@ -157,7 +167,7 @@ class PaymentListActivity : AppCompatActivity() {
                                                 idFormaPago = -1,
                                                 idUsuario = usuarioEncontrado.idUsuario,
                                                 fechaPago = fechaVencimiento,
-                                                monto = -1.0,
+                                                monto = monto,
                                                 cantCuotas = -1
                                             )
                                         }
@@ -168,7 +178,7 @@ class PaymentListActivity : AppCompatActivity() {
                                                 idFormaPago = -1,
                                                 idUsuario = usuarioEncontrado.idUsuario,
                                                 fechaPago = fechaVencimiento,
-                                                monto = -1.0,
+                                                monto = monto,
                                                 cantCuotas = -1
                                             )
                                         }
@@ -193,7 +203,7 @@ class PaymentListActivity : AppCompatActivity() {
                                 pagoDinamicoVisual,
                                 estadoPago
                             ) { pago, estado ->
-                                Toast.makeText(this, "Seleccionado: ${pago.idPago}, estado: $estado", Toast.LENGTH_SHORT).show()
+                                mostrarDetallePagoSocio(this, pago, usuarioEncontrado, estado, fechaVencimiento)
                             }
 
                             recyclerView.adapter = adapterSocio
@@ -219,8 +229,8 @@ class PaymentListActivity : AppCompatActivity() {
                         textEstado.text = "ESTADO: ${rol}"
 
                         if (pagos != null) {
-                            adapterNoSocio = PaymentNoSocioAdapter(pagos){ pagoSeleccionado ->
-                                Toast.makeText(this, "Pago seleccionado: ${pagoSeleccionado.idPago}", Toast.LENGTH_SHORT).show()
+                            adapterNoSocio = PaymentNoSocioAdapter(pagos){ pago ->
+                                mostrarDetallePagoNoSocio(this, pago, usuarioEncontrado)
                             }
 
                             recyclerViewNoSocio.adapter = adapterNoSocio
@@ -229,10 +239,15 @@ class PaymentListActivity : AppCompatActivity() {
                     }
                 } else {
                     labelBusqueda.text = dni
+                    labelBusqueda.visibility = View.VISIBLE
+                    labelBusquedaGenerico.visibility = View.VISIBLE
+                    labelBusquedaGenerico.text = "No se encontraron resultados para:"
+                    labelBusqueda.text = formatearDNI(dni)
                     userCard.visibility = View.GONE
                     recyclerView.visibility = View.GONE
                     recyclerViewNoSocio.visibility = View.GONE
                     nextButton.visibility = View.GONE
+                    Toast.makeText(this, "No se encontraron ningún usuario", Toast.LENGTH_SHORT).show()
                 }
             }
         }
@@ -251,7 +266,14 @@ class PaymentListActivity : AppCompatActivity() {
         }
     }
 
-    fun resetHora(cal: Calendar): Calendar {
+    private fun formatearDNI(dni: String): String {
+        return dni.reversed()
+            .chunked(3)
+            .joinToString(".")
+            .reversed()
+    }
+
+    private fun resetHora(cal: Calendar): Calendar {
         cal.set(Calendar.HOUR_OF_DAY, 0)
         cal.set(Calendar.MINUTE, 0)
         cal.set(Calendar.SECOND, 0)
@@ -259,7 +281,7 @@ class PaymentListActivity : AppCompatActivity() {
         return cal
     }
 
-    fun normalizarFechasParaVisualizacion(pagos: List<Pago>): List<Pair<Pago, Date>> {
+    private fun normalizarFechasParaVisualizacion(pagos: List<Pago>): List<Pair<Pago, Date>> {
         val formato = SimpleDateFormat("yyyy-MM", Locale.getDefault())
         val fechasAsignadas = mutableSetOf<String>()
         val resultado = mutableListOf<Pair<Pago, Date>>()
@@ -279,7 +301,7 @@ class PaymentListActivity : AppCompatActivity() {
         return resultado
     }
 
-    fun calcularFechaVisualParaDinamico(pago: Pago, fechasOcupadas: Set<String>): Date {
+    private fun calcularFechaVisualParaDinamico(pago: Pago, fechasOcupadas: Set<String>): Date {
         val formato = SimpleDateFormat("yyyy-MM", Locale.getDefault())
         val calendar = Calendar.getInstance().apply { time = pago.fechaPago ?: Date() }
 
@@ -288,5 +310,157 @@ class PaymentListActivity : AppCompatActivity() {
         }
 
         return calendar.time
+    }
+
+    private fun mostrarDetallePagoSocio(context: Context, pago: Pago, usuario: UsuarioPago, estado: Int, fechaVencimiento: Date?) {
+        val dialog = com.google.android.material.bottomsheet.BottomSheetDialog(context)
+        val view = LayoutInflater.from(context).inflate(R.layout.modal_detalle_pago, null)
+
+        val textEstado = view.findViewById<TextView>(R.id.textEstado)
+        val textFecha = view.findViewById<TextView>(R.id.textFecha)
+        val textNombre = view.findViewById<TextView>(R.id.textNombre)
+        val textDocumento = view.findViewById<TextView>(R.id.textDocumento)
+        val textActividades = view.findViewById<TextView>(R.id.textActividades)
+        val textMonto = view.findViewById<TextView>(R.id.textMonto)
+        val btnImprimir = view.findViewById<Button>(R.id.btnImprimir)
+        val contenedor = view.findViewById<View>(R.id.contenedorDetallePago)
+
+        textActividades.visibility = View.GONE
+
+        val formato = SimpleDateFormat("d-MM-yyyy HH:mm:ss", Locale.getDefault())
+        val fecha = pago.fechaPago?.let { formato.format(it) } ?: "Sin fecha"
+        val fechaVencimientoFormateada = formato.format(fechaVencimiento)
+
+        if(estado == 1)
+        {
+            textEstado.text = "\nEstado: Primera Cuota"
+            textFecha.visibility = View.GONE
+        } else if(estado == 2)
+        {
+            textEstado.text = "\nEstado: Vencida"
+            textFecha.text = "\nFecha Vencimiento:\n\n $fechaVencimientoFormateada"
+        } else if(estado == 3)
+        {
+            textEstado.text = "\nEstado: Por Vencer"
+            textFecha.text = "\nFecha Vencimiento:\n\n $fechaVencimientoFormateada"
+        } else if(estado == 4)
+        {
+            textEstado.text = "\nEstado: Pendiente de Pago"
+            textFecha.text = "\nFecha Vencimiento:\n\n $fechaVencimientoFormateada"
+        } else
+        {
+            textEstado.text = "\nEstado: Pagado"
+            textFecha.text = "\nFecha Pago:\n\n $fecha"
+        }
+
+        textNombre.text = "\nNombre Socio: ${usuario.nombre} ${usuario.apellido}"
+        textDocumento.text = "\nDocumento: ${formatearDNI(usuario.documento)}"
+        textMonto.text = "\nMonto: $${pago.monto}"
+
+        btnImprimir.setOnClickListener {
+            val bitmap = capturarVistaComoBitmap(contenedor)
+            val guardado = guardarEnGaleria(context, bitmap)
+
+            val mensaje = if (guardado) "Imagen guardada en Galería" else "Error al guardar imagen"
+            Toast.makeText(context, mensaje, Toast.LENGTH_SHORT).show()
+        }
+
+        dialog.setContentView(view)
+        dialog.show()
+    }
+
+    private fun mostrarDetallePagoNoSocio(context: Context, pago: Pago, usuario: UsuarioPago) {
+        val dialog = com.google.android.material.bottomsheet.BottomSheetDialog(context)
+        val view = LayoutInflater.from(context).inflate(R.layout.modal_detalle_pago, null)
+
+        val textEstado = view.findViewById<TextView>(R.id.textEstado)
+        val textFecha = view.findViewById<TextView>(R.id.textFecha)
+        val textNombre = view.findViewById<TextView>(R.id.textNombre)
+        val textDocumento = view.findViewById<TextView>(R.id.textDocumento)
+        val textActividades = view.findViewById<TextView>(R.id.textActividades)
+        val textMonto = view.findViewById<TextView>(R.id.textMonto)
+        val btnImprimir = view.findViewById<Button>(R.id.btnImprimir)
+        val contenedor = view.findViewById<View>(R.id.contenedorDetallePago)
+
+        val formato = SimpleDateFormat("d-MM-yyyy HH:mm:ss", Locale.getDefault())
+        val fecha = pago.fechaPago?.let { formato.format(it) } ?: "Sin fecha"
+
+        textEstado.text = "\nEstado: Pagado"
+        textFecha.text = "\nFecha Pago:\n\n $fecha"
+        textNombre.text = "\nNombre: ${usuario.nombre} ${usuario.apellido}"
+        textDocumento.text = "\nDocumento: ${formatearDNI(usuario.documento)}"
+        textMonto.text = "Monto: $${pago.monto}"
+
+        val pagoRepository = PagoRepository(context)
+        val actividadesContratadas = pagoRepository.obtenerActividadesProgramadasPorPago(pago.idPago)
+
+        val stringBuilder = StringBuilder()
+        if(actividadesContratadas.size == 1)
+        {
+            stringBuilder.append("\nActividad Contratada:\n\n")
+        } else
+        {
+            stringBuilder.append("\nActividades Contratadas:\n\n")
+        }
+
+        for (actividad in actividadesContratadas) {
+            val fechaFormateada = SimpleDateFormat("dd-MM-yyyy HH:mm", Locale.getDefault()).format(actividad.fechaHora ?: Date())
+            stringBuilder.append("• ${actividad.nombreActividad} - ${fechaFormateada} hs\n")
+        }
+
+        textActividades.text = stringBuilder.toString()
+
+        btnImprimir.setOnClickListener {
+            val bitmap = capturarVistaComoBitmap(contenedor)
+            val guardado = guardarEnGaleria(context, bitmap)
+
+            val mensaje = if (guardado) "Imagen guardada en Galería" else "Error al guardar imagen"
+            Toast.makeText(context, mensaje, Toast.LENGTH_SHORT).show()
+        }
+
+        dialog.setContentView(view)
+        dialog.show()
+    }
+
+    private fun capturarVistaComoBitmap(view: View): Bitmap {
+        val bitmap = Bitmap.createBitmap(view.width, view.height, Bitmap.Config.ARGB_8888)
+        val canvas = Canvas(bitmap)
+        view.draw(canvas)
+        return bitmap
+    }
+
+    private fun guardarEnGaleria(context: Context, bitmap: Bitmap): Boolean {
+        val resolver = context.contentResolver
+        val nombreArchivo = "detalle_pago_${System.currentTimeMillis()}.png"
+
+        val contentValues = ContentValues().apply {
+            put(MediaStore.Images.Media.DISPLAY_NAME, nombreArchivo)
+            put(MediaStore.Images.Media.MIME_TYPE, "image/png")
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                put(MediaStore.Images.Media.RELATIVE_PATH, "Pictures/DetallesPagos")
+                put(MediaStore.Images.Media.IS_PENDING, 1)
+            }
+        }
+
+        val uri = resolver.insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, contentValues)
+
+        uri?.let {
+            resolver.openOutputStream(it).use { outputStream ->
+                if (outputStream != null) {
+                    bitmap.compress(Bitmap.CompressFormat.PNG, 100, outputStream)
+                    outputStream.flush()
+                }
+            }
+
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                contentValues.clear()
+                contentValues.put(MediaStore.Images.Media.IS_PENDING, 0)
+                resolver.update(uri, contentValues, null, null)
+            }
+
+            return true
+        }
+
+        return false
     }
 }

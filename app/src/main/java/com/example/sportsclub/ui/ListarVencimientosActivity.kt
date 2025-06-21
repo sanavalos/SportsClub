@@ -13,6 +13,7 @@ import android.graphics.Canvas
 import android.content.ContentValues
 import android.provider.MediaStore
 import android.os.Build
+import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -39,6 +40,7 @@ class ListarVencimientosActivity : AppCompatActivity() {
         }
 
         val recyclerView = findViewById<RecyclerView>(R.id.recyclerVencimientos)
+        val labelInformativo = findViewById<TextView>(R.id.labelInformativo)
         recyclerView.layoutManager = LinearLayoutManager(this)
 
         val socioRepository = SocioRepository(this)
@@ -47,10 +49,12 @@ class ListarVencimientosActivity : AppCompatActivity() {
         if(socios.size > 0)
         {
             recyclerView.visibility = View.VISIBLE
+            labelInformativo.visibility = View.GONE
         }
         else
         {
             recyclerView.visibility = View.GONE
+            labelInformativo.visibility = View.VISIBLE
         }
 
         val adapter = ListarVencimientosAdapter(socios)
