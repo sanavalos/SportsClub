@@ -2,6 +2,7 @@ package com.example.sportsclub.ui
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.LinearLayout
@@ -34,7 +35,9 @@ class ActividadesActivity : AppCompatActivity() {
         }
 
         @Suppress("DEPRECATION")
-        selectedActivities = intent.getParcelableArrayListExtra<SelectedActividadData>("selected_activities")
+        selectedActivities = intent.getParcelableArrayListExtra<SelectedActividadData>(
+            "selected_activities",
+        )
         setupUI()
         displaySelectedActivities()
     }
@@ -82,6 +85,8 @@ class ActividadesActivity : AppCompatActivity() {
     }
 
     private fun mostrarUsuario(usuario: Usuario) {
+        findViewById<LinearLayout>(R.id.resultado_busqueda).visibility = View.VISIBLE
+        findViewById<LinearLayout>(R.id.usuario_info).visibility = View.VISIBLE
         usuarioSeleccionado = usuario
         val mensajeResultado = findViewById<TextView>(R.id.mensaje_resultado)
         val numeroUsuario = findViewById<TextView>(R.id.numero_usuario)
