@@ -35,8 +35,7 @@ class DatosPagoActivity : AppCompatActivity() {
         val idUsuario = intent.getIntExtra("idUsuario", -1)
         val estadoPago = intent.getIntExtra("estadoPago", -1)
         val tipo = intent.getStringExtra("tipo")
-        @Suppress("DEPRECATION")
-        val actividades = intent.getSerializableExtra("actividades") as? ArrayList<ActividadProgramada>
+        val actividadesIds = intent.getIntegerArrayListExtra("actividades")
         setContentView(R.layout.activity_datos_pago)
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
@@ -102,7 +101,7 @@ class DatosPagoActivity : AppCompatActivity() {
                 editTextMonto.setText(monto.toString())
             }
         } else if (tipo == "noSocio") {
-            val idsProgramadas = actividades?.map { it.idActividadProgramada } ?: emptyList()
+            val idsProgramadas = actividadesIds ?: emptyList()
             monto = pagoRepository.obtenerMontoTotalPorActividades(idsProgramadas)
             editTextMonto.setText("")
         }
@@ -138,7 +137,7 @@ class DatosPagoActivity : AppCompatActivity() {
             if (tipo == "socio") {
                 pagoRepository.registrarPagoSocio(nuevoPago, estadoPago)
             } else if (tipo == "noSocio") {
-                pagoRepository.registrarPagoNoSocio(nuevoPago, actividades!!)
+                pagoRepository.registrarPagoNoSocio(nuevoPago, actividadesIds!!)
             }
 
             val intent = Intent(this, PagoOkayActivity::class.java)

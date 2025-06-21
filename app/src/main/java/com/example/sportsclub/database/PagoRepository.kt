@@ -126,8 +126,8 @@ class PagoRepository(private val context: Context) {
         return total
     }
 
-    fun registrarPagoNoSocio(pago: Pago, actividades: List<ActividadProgramada>): Boolean {
-        if (actividades.isEmpty()) return false
+    fun registrarPagoNoSocio(pago: Pago, idsActividades: List<Int>): Boolean {
+        if (idsActividades.isEmpty()) return false
 
         val db = dbHelper.writableDatabase
         var success = false
@@ -148,9 +148,9 @@ class PagoRepository(private val context: Context) {
             val idPago = db.insert("Pagos", null, pagoValues)
             if (idPago == -1L) return false
 
-            for (actividad in actividades) {
+            for (idActividad in idsActividades) {
                 val actividadValues = ContentValues().apply {
-                    put("id_actividad_programada", actividad.idActividadProgramada)
+                    put("id_actividad_programada", idActividad)
                     put("id_pago", idPago)
                 }
                 val resultado = db.insert("Actividades_Contratadas", null, actividadValues)
