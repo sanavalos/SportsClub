@@ -33,10 +33,8 @@ class ActividadesActivity : AppCompatActivity() {
             insets
         }
 
-        selectedActivities = intent.getParcelableArrayListExtra(
-            "selected_activities",
-            SelectedActividadData::class.java
-        )
+        @Suppress("DEPRECATION")
+        selectedActivities = intent.getParcelableArrayListExtra<SelectedActividadData>("selected_activities")
         setupUI()
         displaySelectedActivities()
     }

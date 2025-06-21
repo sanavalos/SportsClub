@@ -229,10 +229,11 @@ class PaymentListActivity : AppCompatActivity() {
                         textEstado.text = "ESTADO: ${rol}"
 
                         if (pagos != null) {
-                            adapterNoSocio = PaymentNoSocioAdapter(pagos){ pago ->
+                            val pagosOrdenados = pagos.sortedByDescending { it.fechaPago }
+
+                            adapterNoSocio = PaymentNoSocioAdapter(pagosOrdenados) { pago ->
                                 mostrarDetallePagoNoSocio(this, pago, usuarioEncontrado)
                             }
-
                             recyclerViewNoSocio.adapter = adapterNoSocio
                             recyclerViewNoSocio.layoutManager = LinearLayoutManager(this)
                         }

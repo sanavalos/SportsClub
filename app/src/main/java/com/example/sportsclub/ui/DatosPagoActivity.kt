@@ -43,6 +43,10 @@ class DatosPagoActivity : AppCompatActivity() {
             insets
         }
 
+        println("ID Usuario: $idUsuario")
+        println("Tipo: $tipo")
+        println("Actividades IDs: $actividadesIds")
+
         val efectivoRadio = findViewById<RadioButton>(R.id.efectivoRadio)
         val tarjetaRadio = findViewById<RadioButton>(R.id.tarjetaRadio)
 
@@ -103,7 +107,7 @@ class DatosPagoActivity : AppCompatActivity() {
         } else if (tipo == "noSocio") {
             val idsProgramadas = actividadesIds ?: emptyList()
             monto = pagoRepository.obtenerMontoTotalPorActividades(idsProgramadas)
-            editTextMonto.setText("")
+            editTextMonto.setText(monto.toString())
         }
 
         val pagoButton = findViewById<Button>(R.id.pagoButton)
