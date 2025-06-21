@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.view.View
 import android.widget.Button
 import android.widget.CheckedTextView
 import android.widget.ExpandableListView
@@ -58,9 +59,17 @@ class ActividadesListaActivity : AppCompatActivity() {
         })
 
         val calendarView = findViewById<CalendarView>(R.id.calendarView)
+        val toggleCalendarButton = findViewById<Button>(R.id.toggleCalendarButton)
+        calendarView.visibility = View.GONE
+
+        toggleCalendarButton.setOnClickListener {
+            calendarView.visibility = if (calendarView.visibility == View.VISIBLE) View.GONE else View.VISIBLE
+        }
+
         calendarView.setOnDateChangeListener { _, year, month, dayOfMonth ->
             val date = String.format("%04d-%02d-%02d", year, month + 1, dayOfMonth)
             selectedDate = date
+            calendarView.visibility = View.GONE  // Hide calendar
             loadActivitiesForDate(date)
         }
 
