@@ -135,7 +135,9 @@ class ActividadesListaActivity : AppCompatActivity() {
 
         groupList.forEach { group ->
             val itemCount = childMapping[group]?.size ?: 0
-            checkedItems[group] = SparseBooleanArray(itemCount)
+            if (!checkedItems.containsKey(group)) {
+                checkedItems[group] = SparseBooleanArray(itemCount)
+            }
         }
 
         val groupData = groupList.map { mapOf("GROUP_NAME" to it) }
