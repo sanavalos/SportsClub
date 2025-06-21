@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/actividad_info"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="12dp"
+    android:paddingVertical="16dp"
+    android:paddingHorizontal="12dp"
+    android:background="@drawable/background_form"
+    android:orientation="horizontal"
+    android:gravity="center_vertical">
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/activityNameTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Fútbol"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:textColor="#49454F"
+            android:fontFamily="@font/roboto" />
+
+        <TextView
+            android:id="@+id/activityScheduleTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="14/04/2025 08:00hs"
+            android:textSize="16sp"
+            android:textColor="#000000"
+            android:fontFamily="@font/roboto" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/activityPriceTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="$1500"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:textColor="#49454F"
+        android:fontFamily="@font/roboto"
+        android:gravity="end" />
+</LinearLayout>
