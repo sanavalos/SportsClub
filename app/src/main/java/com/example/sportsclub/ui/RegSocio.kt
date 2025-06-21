@@ -103,8 +103,48 @@ class RegSocio : AppCompatActivity() {
             val planNombre = planSocio.text.toString()
             val planId = repoPlan.obtenerIdPlan(planNombre)
 
-            if (tipoDocId == -1 || planId == -1) {
-                Toast.makeText(this, "Seleccioná un tipo de documento y plan válidos.", Toast.LENGTH_SHORT).show()
+            if (usuarioRepo.existeUsuarioPorTipoYDocumento(tipoDocId, documento)) {
+                Toast.makeText(this, "Ya existe un usuario con ese tipo y número de documento.", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
+            if (nombre.isEmpty()) {
+                Toast.makeText(this, "Ingresa el nombre", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
+            if (apellido.isEmpty()) {
+                Toast.makeText(this, "Ingresa el apellido", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
+            if (telefono.isEmpty()) {
+                Toast.makeText(this, "Ingresa el teléfono", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
+            if (direccion.isEmpty()) {
+                Toast.makeText(this, "Ingresa la dirección", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
+            if (documento.isEmpty()) {
+                Toast.makeText(this, "Ingresa el número de documento", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
+            if (tipoDocId == -1) {
+                Toast.makeText(this, "Seleccioná un tipo de documento", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
+            if (planId == -1) {
+                Toast.makeText(this, "Seleccioná un plan", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
+            if (imagenCarnetByteArray == null) {
+                Toast.makeText(this, "Debés seleccionar una imagen del carnet antes de continuar.", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
 

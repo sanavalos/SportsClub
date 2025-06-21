@@ -12,6 +12,21 @@ import com.example.sportsclub.models.Usuario
 class UsuarioRepository(context: Context) {
     private val dbHelper = UserDBHelper(context)
 
+    fun existeUsuarioPorTipoYDocumento(idTipoDocumento: Int, documento: String): Boolean {
+        val db = dbHelper.readableDatabase
+        val cursor = db.rawQuery(
+            "SELECT 1 FROM Usuarios WHERE id_tipo_documento = ? AND documento = ? LIMIT 1",
+            arrayOf(idTipoDocumento.toString(), documento)
+        )
+
+        val existe = cursor.moveToFirst()
+
+        cursor.close()
+        db.close()
+
+        return existe
+    }
+
     fun obtenerUsuarioYPagosPorDocumento(doc: String): UsuarioPago? {
         val db = dbHelper.readableDatabase
 

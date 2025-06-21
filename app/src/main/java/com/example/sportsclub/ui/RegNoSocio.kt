@@ -28,6 +28,7 @@ class RegNoSocio : AppCompatActivity() {
     private lateinit var direccionEditText: TextInputEditText
     private lateinit var autoCompleteTextViewDocNoSocio: MaterialAutoCompleteTextView
     private lateinit var aptoFisicoCheckBox: CheckBox
+    val usuarioRepository = UsuarioRepository(this)
 
     private lateinit var opcionesDocNoSocio: List<TipoDocumento>
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -72,11 +73,11 @@ class RegNoSocio : AppCompatActivity() {
 
         val noSocioOkay = findViewById<Button>(R.id.regNoSocioButton)
         noSocioOkay.setOnClickListener {
+
             val usuario = validarFormularioNoSocio()
 
             if(usuario != null)
             {
-                val usuarioRepository = UsuarioRepository(this)
                 val success = usuarioRepository.crearNoSocio(usuario)
 
                 if(success)
@@ -90,10 +91,6 @@ class RegNoSocio : AppCompatActivity() {
                     Toast.makeText(this, "Error al registrar el No Socio", Toast.LENGTH_SHORT).show()
                 }
             }
-
-
-
-
         }
     } //FIN DEL ON CREATE
 
@@ -140,6 +137,11 @@ class RegNoSocio : AppCompatActivity() {
 
         if (tipoDocSeleccionado == null) {
             Toast.makeText(this, "Tipo de documento inválido", Toast.LENGTH_SHORT).show()
+            return null
+        }
+
+        if (usuarioRepository.existeUsuarioPorTipoYDocumento(tipoDocSeleccionado.idTipoDocumento, documento)) {
+            Toast.makeText(this, "Ya existe un usuario con ese tipo y número de documento.", Toast.LENGTH_SHORT).show()
             return null
         }
 
