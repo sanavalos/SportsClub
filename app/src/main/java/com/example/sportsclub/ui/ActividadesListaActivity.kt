@@ -64,12 +64,14 @@ class ActividadesListaActivity : AppCompatActivity() {
 
         toggleCalendarButton.setOnClickListener {
             calendarView.visibility = if (calendarView.visibility == View.VISIBLE) View.GONE else View.VISIBLE
+            toggleCalendarButton.visibility = if (toggleCalendarButton.visibility == View.VISIBLE) View.GONE else View.VISIBLE
         }
 
         calendarView.setOnDateChangeListener { _, year, month, dayOfMonth ->
             val date = String.format("%04d-%02d-%02d", year, month + 1, dayOfMonth)
             selectedDate = date
-            calendarView.visibility = View.GONE  // Hide calendar
+            calendarView.visibility = View.GONE
+            toggleCalendarButton.visibility = View.VISIBLE
             loadActivitiesForDate(date)
         }
 
