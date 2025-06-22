@@ -130,7 +130,9 @@ class SocioRepository(context: Context) {
             put("id_usuario", socio.idUsuario)
             put("id_plan", socio.idPlan)
             put("nro_carnet", socio.nroCarnet)
-            put("fecha_vencimiento", SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(socio.fechaVencimiento))
+            put("fecha_vencimiento", socio.fechaVencimiento?.let {
+                SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(it)
+            })
             put("imagen_carnet", socio.imagenCarnet)
         }
 

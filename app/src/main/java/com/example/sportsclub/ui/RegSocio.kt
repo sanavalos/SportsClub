@@ -156,9 +156,6 @@ class RegSocio : AppCompatActivity() {
             }
 
             val nroCarnet = "SC${System.currentTimeMillis()}"
-            val fechaVencimiento = Calendar.getInstance().apply {
-                add(Calendar.YEAR, 1)
-            }.time
 
             val nuevoUsuario = Usuario(
                 idTipoDocumento = tipoDocId,
@@ -178,7 +175,7 @@ class RegSocio : AppCompatActivity() {
                     idUsuario = idUsuario.toInt(),
                     idPlan = planId,
                     nroCarnet = nroCarnet,
-                    fechaVencimiento = fechaVencimiento,
+                    fechaVencimiento = null,
                     imagenCarnet = imagenCarnetByteArray
                 )
 
