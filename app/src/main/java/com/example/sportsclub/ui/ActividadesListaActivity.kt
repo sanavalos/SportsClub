@@ -17,6 +17,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.sportsclub.R
+import com.example.sportsclub.adapters.ActividadesExpandableAdapter
 import com.example.sportsclub.database.ActividadRepository
 import com.example.sportsclub.models.SelectedActividadData
 import java.text.SimpleDateFormat
@@ -59,12 +60,11 @@ class ActividadesListaActivity : AppCompatActivity() {
         })
 
         val calendarView = findViewById<CalendarView>(R.id.calendarView)
-        val toggleCalendarButton = findViewById<Button>(R.id.toggleCalendarButton)
+        val toggleCalendarButton = findViewById<ImageView>(R.id.toggleCalendarButton)
         calendarView.visibility = View.GONE
 
         toggleCalendarButton.setOnClickListener {
             calendarView.visibility = if (calendarView.visibility == View.VISIBLE) View.GONE else View.VISIBLE
-            toggleCalendarButton.visibility = if (toggleCalendarButton.visibility == View.VISIBLE) View.GONE else View.VISIBLE
         }
 
         calendarView.setOnDateChangeListener { _, year, month, dayOfMonth ->
@@ -132,26 +132,12 @@ class ActividadesListaActivity : AppCompatActivity() {
 
     private fun setupExpandableListView() {
         val expandableListView = findViewById<ExpandableListView>(R.id.expandableListView)
-        val groupList = actividadesData.keys.toList()
-        val childData = groupList.map { group ->
-            actividadesData[group]?.map { mapOf("CHILD_NAME" to it.fechaHora) } ?: emptyList()
-        }
-
-        val adapter = SimpleExpandableListAdapter(
-            this,
-            groupList.map { mapOf("GROUP_NAME" to it) },
-            android.R.layout.simple_expandable_list_item_1,
-            arrayOf("GROUP_NAME"),
-            intArrayOf(android.R.id.text1),
-            childData,
-            android.R.layout.simple_list_item_multiple_choice,
-            arrayOf("CHILD_NAME"),
-            intArrayOf(android.R.id.text1)
-        )
+        val adapter = ActividadesExpandableAdapter(this, actividadesData, selectedProgrammedIds)
 
         expandableListView.setAdapter(adapter)
+
         expandableListView.setOnChildClickListener { _, view, groupPos, childPos, _ ->
-            val group = groupList[groupPos]
+            val group = actividadesData.keys.toList()[groupPos]
             val child = actividadesData[group]?.get(childPos)
             child?.let {
                 if (selectedProgrammedIds.contains(it.actividadProgramadaId)) {
@@ -160,7 +146,7 @@ class ActividadesListaActivity : AppCompatActivity() {
                     selectedProgrammedIds.add(it.actividadProgramadaId)
                 }
 
-                val checkView = view.findViewById<CheckedTextView>(android.R.id.text1)
+                val checkView = view.findViewById<CheckedTextView>(R.id.checkedTextView)
                 checkView.isChecked = selectedProgrammedIds.contains(it.actividadProgramadaId)
             }
             true

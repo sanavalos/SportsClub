@@ -117,6 +117,11 @@ class CarnetSocioActivity : AppCompatActivity() {
             } else {
                 Toast.makeText(this, "Error al guardar imagen", Toast.LENGTH_SHORT).show()
             }
+
+            contenedorVerde.visibility = View.GONE
+            botones.visibility = View.GONE
+            searchContainer.visibility = View.VISIBLE
+            toolbar.visibility = View.VISIBLE
         }
 
     }

@@ -56,6 +56,8 @@ class MainMenu : AppCompatActivity() {
             val listarVencimientosButton = bottomSheetView.findViewById<TextView>(R.id.listarVencimientosButton)
             val imprimirCarnetButton = bottomSheetView.findViewById<TextView>(R.id.imprimirCarnetButton)
             val asignarActividadButton = bottomSheetView.findViewById<TextView>(R.id.asignarActividadButton)
+            val registrarSocio = bottomSheetView.findViewById<TextView>(R.id.registrarSocioButton)
+            val registrarNoSocio = bottomSheetView.findViewById<TextView>(R.id.registrarNoSocioButton)
 
             listaPagosButton.setOnClickListener {
                 startActivity(Intent(this, PaymentListActivity::class.java))
@@ -75,6 +77,16 @@ class MainMenu : AppCompatActivity() {
             asignarActividadButton.setOnClickListener {
                 startActivity(Intent(this, ActividadesListaActivity::class.java))
                 dialog.dismiss()
+            }
+
+            registrarSocio.setOnClickListener {
+                val intent = Intent(this, RegSocio::class.java)
+                startActivity(intent)
+            }
+
+            registrarNoSocio.setOnClickListener {
+                val intent = Intent(this, RegNoSocio::class.java)
+                startActivity(intent)
             }
 
             dialog.show()

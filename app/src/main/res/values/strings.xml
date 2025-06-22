@@ -15,6 +15,8 @@
     <string name="listar_vencimientos_burger">LISTAR VENCIMIENTOS DEL DÍA</string>
     <string name="imprimir_carnet_socio_burger">IMPRIMIR CARNET SOCIO</string>
     <string name="asignar_actividad_deportivo_burger">ASIGNAR ACTIVIDAD DEL CLUB DEPORTIVO</string>
+    <string name="registrar_socio_mayusculas">REGISTRAR SOCIO</string>
+    <string name="registrar_no_socio_mayusculas">REGISTRAR NO SOCIO</string>
     <string name="secondary_socio">REGISTRAR SOCIO</string>
     <string name="secondary_no_socio">REGISTRAR NO SOCIO</string>
     <string name="nombre_form">Nombre...</string>

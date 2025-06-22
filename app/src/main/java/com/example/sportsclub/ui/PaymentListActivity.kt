@@ -364,6 +364,8 @@ class PaymentListActivity : AppCompatActivity() {
 
             val mensaje = if (guardado) "Imagen guardada en Galería" else "Error al guardar imagen"
             Toast.makeText(context, mensaje, Toast.LENGTH_SHORT).show()
+
+            dialog.dismiss()
         }
 
         dialog.setContentView(view)
@@ -417,6 +419,8 @@ class PaymentListActivity : AppCompatActivity() {
 
             val mensaje = if (guardado) "Imagen guardada en Galería" else "Error al guardar imagen"
             Toast.makeText(context, mensaje, Toast.LENGTH_SHORT).show()
+
+            dialog.dismiss()
         }
 
         dialog.setContentView(view)

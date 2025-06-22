@@ -95,9 +95,9 @@ class ActividadesActivity : AppCompatActivity() {
         val textViewEstado = findViewById<TextView>(R.id.textView6)
 
         mensajeResultado.text = "Mostrando resultado para: "
-        numeroUsuario.text = usuario.documento
+        numeroUsuario.text = formatearDNI(usuario.documento)
         textViewNombre.text = "${usuario.nombre.uppercase()} ${usuario.apellido.uppercase()}"
-        textViewDocumento.text = "DOCUMENTO: ${usuario.documento}"
+        textViewDocumento.text = "DOCUMENTO: ${formatearDNI(usuario.documento)}"
         val tipoUsuario = when (usuario.idTipoUsuario) {
             1 -> "ADMINISTRADOR"
             2 -> "SOCIO"
@@ -130,4 +130,10 @@ class ActividadesActivity : AppCompatActivity() {
         }
     }
 
+    private fun formatearDNI(dni: String): String {
+        return dni.reversed()
+            .chunked(3)
+            .joinToString(".")
+            .reversed()
+    }
 }
