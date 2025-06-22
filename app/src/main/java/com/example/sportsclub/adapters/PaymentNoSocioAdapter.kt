@@ -7,6 +7,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.sportsclub.R
 import com.example.sportsclub.models.Pago
+import java.text.NumberFormat
 import java.text.SimpleDateFormat
 import java.util.Locale
 
@@ -26,10 +27,10 @@ class PaymentNoSocioAdapter(private val pagos: List<Pago>, private val onClick: 
 
     override fun onBindViewHolder(holder: PaymentViewHolder, position: Int) {
         val pago = pagos[position]
-
+        val currencyFormat = NumberFormat.getCurrencyInstance(Locale("es", "AR"))
         val formato = SimpleDateFormat("dd/MM/yyyy HH:mm:ss", Locale.getDefault())
 
-        holder.actividad.text = "MONTO: ${pago.monto}"
+        holder.actividad.text = "MONTO: ${currencyFormat.format(pago.monto)}"
         holder.fecha.text = formato.format(pago.fechaPago)
 
         holder.itemView.setOnClickListener {

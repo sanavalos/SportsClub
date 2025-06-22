@@ -36,6 +36,7 @@ import android.provider.MediaStore
 import android.os.Build
 import com.example.sportsclub.database.PagoRepository
 import com.example.sportsclub.models.UsuarioPago
+import java.text.NumberFormat
 
 
 class PaymentListActivity : AppCompatActivity() {
@@ -43,6 +44,7 @@ class PaymentListActivity : AppCompatActivity() {
     private var pagoPendiente: Pago? = null
     private lateinit var adapterSocio: PaymentAdapter
     private lateinit var adapterNoSocio: PaymentNoSocioAdapter
+    val currencyFormat = NumberFormat.getCurrencyInstance(Locale("es", "AR"))
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -53,7 +55,6 @@ class PaymentListActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
-
         val searchInput = findViewById<EditText>(R.id.searchInput)
         val searchIcon = findViewById<ImageView>(R.id.searchIcon)
         val labelBusquedaGenerico = findViewById<TextView>(R.id.labelBusquedaGenerico)
@@ -356,7 +357,7 @@ class PaymentListActivity : AppCompatActivity() {
 
         textNombre.text = "\nNombre Socio: ${usuario.nombre} ${usuario.apellido}"
         textDocumento.text = "\nDocumento: ${formatearDNI(usuario.documento)}"
-        textMonto.text = "\nMonto: $${pago.monto}"
+        textMonto.text = "\nMonto: ${currencyFormat.format(pago.monto)}"
 
         btnImprimir.setOnClickListener {
             val bitmap = capturarVistaComoBitmap(contenedor)
@@ -392,7 +393,7 @@ class PaymentListActivity : AppCompatActivity() {
         textFecha.text = "\nFecha Pago:\n\n $fecha"
         textNombre.text = "\nNombre: ${usuario.nombre} ${usuario.apellido}"
         textDocumento.text = "\nDocumento: ${formatearDNI(usuario.documento)}"
-        textMonto.text = "Monto: $${pago.monto}"
+        textMonto.text = "Monto: ${currencyFormat.format(pago.monto)}"
 
         val pagoRepository = PagoRepository(context)
         val actividadesContratadas = pagoRepository.obtenerActividadesProgramadasPorPago(pago.idPago)

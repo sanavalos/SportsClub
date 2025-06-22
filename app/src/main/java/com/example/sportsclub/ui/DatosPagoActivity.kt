@@ -19,11 +19,12 @@ import com.example.sportsclub.R
 import com.example.sportsclub.database.FormaDePagoRepository
 import com.example.sportsclub.database.PagoRepository
 import com.example.sportsclub.database.SocioRepository
-import com.example.sportsclub.models.ActividadProgramada
 import com.example.sportsclub.models.Pago
 import com.google.android.material.textfield.MaterialAutoCompleteTextView
 import com.google.android.material.textfield.TextInputLayout
+import java.text.NumberFormat
 import java.util.Date
+import java.util.Locale
 
 class DatosPagoActivity : AppCompatActivity() {
     private var monto: Double = 0.0
@@ -42,10 +43,6 @@ class DatosPagoActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
-
-        println("ID Usuario: $idUsuario")
-        println("Tipo: $tipo")
-        println("Actividades IDs: $actividadesIds")
 
         val efectivoRadio = findViewById<RadioButton>(R.id.efectivoRadio)
         val tarjetaRadio = findViewById<RadioButton>(R.id.tarjetaRadio)
@@ -97,6 +94,7 @@ class DatosPagoActivity : AppCompatActivity() {
         }
 
         val editTextMonto = findViewById<EditText>(R.id.editTextMonto)
+        val currencyFormat = NumberFormat.getCurrencyInstance(Locale("es", "AR"))
 
         if (tipo == "socio") {
             val socioRepository = SocioRepository(this)
@@ -104,12 +102,12 @@ class DatosPagoActivity : AppCompatActivity() {
             if(montoObtenido != null)
             {
                 monto = montoObtenido
-                editTextMonto.setText(monto.toString())
+                editTextMonto.setText(currencyFormat.format(monto))
             }
         } else if (tipo == "noSocio") {
             val idsProgramadas = actividadesIds ?: emptyList()
             monto = pagoRepository.obtenerMontoTotalPorActividades(idsProgramadas)
-            editTextMonto.setText(monto.toString())
+            editTextMonto.setText(currencyFormat.format(monto))
         }
 
         val pagoButton = findViewById<Button>(R.id.pagoButton)
