@@ -62,11 +62,19 @@
             android:id="@+id/nombre_socio"
             style="@style/Base.Theme.SportsClub"
             android:layout_width="160dp"
-            android:layout_height="50dp"
+            android:layout_height="wrap_content"
             android:layout_marginTop="40dp"
             android:layout_marginEnd="24dp"
             android:layout_marginBottom="15dp"
             android:hint="@string/nombre_form"
+            app:boxBackgroundMode="filled"
+            app:boxBackgroundColor="@android:color/white"
+            app:boxCornerRadiusTopStart="8dp"
+            app:boxCornerRadiusTopEnd="8dp"
+            app:boxCornerRadiusBottomStart="8dp"
+            app:boxCornerRadiusBottomEnd="8dp"
+            app:boxCollapsedPaddingTop="4dp"
+            app:hintTextAppearance="@style/HintText"
             app:layout_constraintBottom_toTopOf="@+id/celular_socio"
             app:layout_constraintEnd_toStartOf="@+id/apellido_socio"
             app:layout_constraintHorizontal_bias="0.145"
@@ -78,24 +86,34 @@
                 android:id="@+id/editTextNombreSocio"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/background_form"
                 android:fontFamily="@font/roboto"
                 android:inputType="text"
-                android:minHeight="50dp"
-                android:paddingTop="12dp"
+                android:minHeight="40dp"
+                android:paddingTop="14dp"
                 android:paddingBottom="12dp"
-                android:textStyle="italic" />
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:textStyle="italic"
+                android:textColor="@color/textHint" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/apellido_socio"
             style="@style/Base.Theme.SportsClub"
             android:layout_width="160dp"
-            android:layout_height="50dp"
+            android:layout_height="wrap_content"
             android:layout_marginTop="40dp"
             android:layout_marginEnd="32dp"
             android:layout_marginBottom="15dp"
             android:hint="@string/apellido_form"
+            app:boxBackgroundMode="filled"
+            app:boxBackgroundColor="@android:color/white"
+            app:boxCornerRadiusTopStart="8dp"
+            app:boxCornerRadiusTopEnd="8dp"
+            app:boxCornerRadiusBottomStart="8dp"
+            app:boxCornerRadiusBottomEnd="8dp"
+            app:boxCollapsedPaddingTop="4dp"
+            app:hintTextAppearance="@style/HintText"
             app:layout_constraintBottom_toTopOf="@+id/celular_socio"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintRight_toRightOf="parent"
@@ -105,13 +123,15 @@
                 android:id="@+id/editTextApellidoSocio"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/background_form"
                 android:fontFamily="@font/roboto"
-                android:minHeight="50dp"
-                android:paddingTop="12dp"
-                android:paddingBottom="12dp"
                 android:inputType="text"
-                android:textStyle="italic" />
+                android:minHeight="40dp"
+                android:paddingTop="14dp"
+                android:paddingBottom="12dp"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:textStyle="italic"
+                android:textColor="@color/textHint" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -122,6 +142,14 @@
             android:layout_marginTop="100dp"
             android:layout_marginEnd="32dp"
             android:hint="@string/celular_form"
+            app:boxBackgroundMode="filled"
+            app:boxBackgroundColor="@android:color/white"
+            app:boxCornerRadiusTopStart="8dp"
+            app:boxCornerRadiusTopEnd="8dp"
+            app:boxCornerRadiusBottomStart="8dp"
+            app:boxCornerRadiusBottomEnd="8dp"
+            app:boxCollapsedPaddingTop="4dp"
+            app:hintTextAppearance="@style/HintText"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/toolbar">
@@ -130,13 +158,15 @@
                 android:id="@+id/editTextCelularSocio"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/background_form"
                 android:fontFamily="@font/roboto"
                 android:inputType="phone"
-                android:minHeight="50dp"
-                android:paddingTop="12dp"
+                android:minHeight="40dp"
+                android:paddingTop="14dp"
                 android:paddingBottom="12dp"
-                android:textStyle="italic" />
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:textStyle="italic"
+                android:textColor="@color/textHint" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -147,6 +177,14 @@
             android:layout_marginTop="15dp"
             android:layout_marginEnd="32dp"
             android:hint="@string/domicilio_form"
+            app:boxBackgroundMode="filled"
+            app:boxBackgroundColor="@android:color/white"
+            app:boxCornerRadiusTopStart="8dp"
+            app:boxCornerRadiusTopEnd="8dp"
+            app:boxCornerRadiusBottomStart="8dp"
+            app:boxCornerRadiusBottomEnd="8dp"
+            app:boxCollapsedPaddingTop="4dp"
+            app:hintTextAppearance="@style/HintText"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/celular_socio">
@@ -155,12 +193,14 @@
                 android:id="@+id/editTextDomicilioSocio"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/background_form"
                 android:fontFamily="@font/roboto"
-                android:minHeight="50dp"
-                android:paddingTop="12dp"
+                android:minHeight="40dp"
+                android:paddingTop="14dp"
                 android:paddingBottom="12dp"
-                android:textStyle="italic" />
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:textStyle="italic"
+                android:textColor="@color/textHint" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -170,6 +210,14 @@
             android:layout_height="50dp"
             android:layout_marginTop="15dp"
             android:layout_marginEnd="24dp"
+            app:boxBackgroundMode="filled"
+            app:boxBackgroundColor="@android:color/white"
+            app:boxCornerRadiusTopStart="8dp"
+            app:boxCornerRadiusTopEnd="8dp"
+            app:boxCornerRadiusBottomStart="8dp"
+            app:boxCornerRadiusBottomEnd="8dp"
+            app:boxCollapsedPaddingTop="4dp"
+            app:hintTextAppearance="@style/HintText"
             app:layout_constraintEnd_toStartOf="@+id/numDoc_socio"
             app:layout_constraintHorizontal_bias="0.145"
             app:layout_constraintLeft_toLeftOf="parent"
@@ -179,13 +227,16 @@
             <com.google.android.material.textfield.MaterialAutoCompleteTextView
                 android:id="@+id/autoCompleteDoc"
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:minHeight="50dp"
+                android:layout_height="wrap_content"
+                android:minHeight="40dp"
                 android:hint="@string/tipo_doc_form"
-                android:background="@drawable/background_form"
                 android:fontFamily="@font/roboto"
                 android:textStyle="italic"
-                android:padding="12dp" />
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:paddingTop="14dp"
+                android:paddingBottom="12dp"
+                android:textColor="@color/textHint" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -196,6 +247,14 @@
             android:layout_marginTop="15dp"
             android:layout_marginEnd="32dp"
             android:hint="@string/dni_form"
+            app:boxBackgroundMode="filled"
+            app:boxBackgroundColor="@android:color/white"
+            app:boxCornerRadiusTopStart="8dp"
+            app:boxCornerRadiusTopEnd="8dp"
+            app:boxCornerRadiusBottomStart="8dp"
+            app:boxCornerRadiusBottomEnd="8dp"
+            app:boxCollapsedPaddingTop="4dp"
+            app:hintTextAppearance="@style/HintText"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/domicilio_socio">
@@ -204,13 +263,15 @@
                 android:id="@+id/editTextNumDocSocio"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/background_form"
                 android:fontFamily="@font/roboto"
-                android:minHeight="50dp"
-                android:paddingTop="12dp"
+                android:minHeight="40dp"
+                android:paddingTop="14dp"
                 android:paddingBottom="12dp"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
                 android:textStyle="italic"
-                android:inputType="number"/>
+                android:textColor="@color/textHint"
+                android:inputType="number" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -220,6 +281,14 @@
             android:layout_height="50dp"
             android:layout_marginTop="15dp"
             android:layout_marginEnd="32dp"
+            app:boxBackgroundMode="filled"
+            app:boxBackgroundColor="@android:color/white"
+            app:boxCornerRadiusTopStart="8dp"
+            app:boxCornerRadiusTopEnd="8dp"
+            app:boxCornerRadiusBottomStart="8dp"
+            app:boxCornerRadiusBottomEnd="8dp"
+            app:boxCollapsedPaddingTop="4dp"
+            app:hintTextAppearance="@style/HintText"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tipoDoc_socio">
@@ -227,13 +296,16 @@
             <com.google.android.material.textfield.MaterialAutoCompleteTextView
                 android:id="@+id/autoCompletePlan"
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:minHeight="50dp"
+                android:layout_height="wrap_content"
+                android:minHeight="40dp"
                 android:hint="@string/plan_form"
-                android:background="@drawable/background_form"
                 android:fontFamily="@font/roboto"
                 android:textStyle="italic"
-                android:padding="12dp" />
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:paddingTop="14dp"
+                android:paddingBottom="12dp"
+                android:textColor="@color/textHint" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <androidx.appcompat.widget.AppCompatButton

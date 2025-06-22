@@ -60,8 +60,10 @@ class RegNoSocio : AppCompatActivity() {
         autoCompleteTextViewDocNoSocio.inputType = InputType.TYPE_NULL
         autoCompleteTextViewDocNoSocio.keyListener = null
 
-        autoCompleteTextViewDocNoSocio.setOnClickListener {
+        autoCompleteTextViewDocNoSocio.setOnTouchListener { v, event ->
             autoCompleteTextViewDocNoSocio.showDropDown()
+            v.performClick()
+            false
         }
 
         nombreEditText = findViewById<TextInputEditText>(R.id.editTextNombre)

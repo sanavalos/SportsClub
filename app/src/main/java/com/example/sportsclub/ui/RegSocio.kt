@@ -66,14 +66,21 @@ class RegSocio : AppCompatActivity() {
         val planSocio = findViewById<MaterialAutoCompleteTextView>(R.id.autoCompletePlan)
         planSocio.setAdapter(ArrayAdapter(this, R.layout.item_dropdown, opcionesPlan))
         planSocio.inputType = InputType.TYPE_NULL
-        planSocio.setOnClickListener { planSocio.showDropDown() }
+        planSocio.setOnTouchListener { v, event ->
+            planSocio.showDropDown()
+            v.performClick()
+            false
+        }
 
         val opcionesDoc = listOf("DNI", "Pasaporte", "LC")
         val tipoDocSocio = findViewById<MaterialAutoCompleteTextView>(R.id.autoCompleteDoc)
         tipoDocSocio.setAdapter(ArrayAdapter(this, R.layout.item_dropdown, opcionesDoc))
         tipoDocSocio.inputType = InputType.TYPE_NULL
-        tipoDocSocio.setOnClickListener { tipoDocSocio.showDropDown() }
-
+        tipoDocSocio.setOnTouchListener { v, event ->
+            tipoDocSocio.showDropDown()
+            v.performClick()
+            false
+        }
         // TOMA DE DATOS DESDE EL FORMULARIO
         val nombreSocio = findViewById<TextInputEditText>(R.id.editTextNombreSocio)
         val apellidoSocio = findViewById<TextInputEditText>(R.id.editTextApellidoSocio)

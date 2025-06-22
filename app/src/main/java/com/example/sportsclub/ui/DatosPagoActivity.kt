@@ -77,8 +77,10 @@ class DatosPagoActivity : AppCompatActivity() {
         autoCompleteTextViewCuotas.inputType = InputType.TYPE_NULL
         autoCompleteTextViewCuotas.keyListener = null
 
-        autoCompleteTextViewCuotas.setOnClickListener {
+        autoCompleteTextViewCuotas.setOnTouchListener { v, event ->
             autoCompleteTextViewCuotas.showDropDown()
+            v.performClick()
+            false
         }
 
         val formaDePagoRepository = FormaDePagoRepository(this)
