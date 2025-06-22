@@ -9,9 +9,9 @@ import android.widget.Button
 import android.widget.CheckedTextView
 import android.widget.ExpandableListView
 import android.widget.ImageView
-import android.widget.SimpleExpandableListAdapter
 import android.widget.CalendarView
 import android.widget.EditText
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -85,6 +85,12 @@ class ActividadesListaActivity : AppCompatActivity() {
 
         findViewById<Button>(R.id.siguienteButton).setOnClickListener {
             val selected = getCheckedItems()
+
+            if (selected.isEmpty()) {
+                Toast.makeText(this, "Selecciona al menos una actividad", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
             val selectedData = getSelectedActividadesWithDetails(selected)
             val intent = Intent(this, ActividadesActivity::class.java)
             intent.putParcelableArrayListExtra("selected_activities", ArrayList(selectedData))
